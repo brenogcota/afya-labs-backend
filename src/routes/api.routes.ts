@@ -1,6 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 
-const classRouter = Router();
+const apiRouter = Router();
 
 const rateLimit = require('express-rate-limit');
 const slowDown = require('express-slow-down');
@@ -16,12 +16,12 @@ const speedLimiter = slowDown({
     delayMs: 500
 })
 
-classRouter.get('*', limiter, speedLimiter, async (request: Request, response: Response, next: NextFunction) => {
+apiRouter.get('*', limiter, speedLimiter, async (request: Request, response: Response, next: NextFunction) => {
     next();
 });
 
-classRouter.get('/', async (request: Request, response: Response) => {
+apiRouter.get('/', async (request: Request, response: Response) => {
     response.json('basic API')
 });
 
-export default classRouter;
+export default apiRouter;
