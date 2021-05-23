@@ -21,6 +21,7 @@ const speedLimiter = slowDown({
 })
 
 classRouter.get('*', limiter, speedLimiter, async (request, response) => {
+
 });
 
 classRouter.post('/', async (request, response) => {

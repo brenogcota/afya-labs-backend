@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import classRouter from './class.routes';
+import classRouter from './api.routes';
 
 const routes = Router();
 
-routes.use('/class', classRouter);
+routes.use('/api', classRouter);
 
 export default routes;
