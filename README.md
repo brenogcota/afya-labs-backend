@@ -1,5 +1,12 @@
 # Node, Express, TypeORM, Jest
 
+### run
+- npm i
+- npm run typeorm migration:run
+- npm run dev
+
+http://localhost:3000/class
+
 ### dependencies
 - axios
 - cors
