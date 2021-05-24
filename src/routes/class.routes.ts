@@ -1,5 +1,5 @@
 import { Router, Request, Response, NextFunction } from 'express';
-import ClassController from '../controllers/classController';
+import ClassController from '../controllers/ClassController';
 
 const classController = new ClassController();
 
