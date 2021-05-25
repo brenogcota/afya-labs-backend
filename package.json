@@ -43,10 +43,11 @@
       "express-slow-down": "^1.4.0",
       "helmet": "^4.6.0",
       "morgan": "^1.10.0",
+      "mysql": "^2.14.1",
       "pg": "^8.2.1",
       "reflect-metadata": "^0.1.10",
       "typeorm": "0.2.25",
-      "uuidv4": "^6.0.7",
-      "mysql": "^2.14.1"
+      "typeorm-encrypted": "^0.5.6",
+      "uuidv4": "^6.0.7"
    }
 }
