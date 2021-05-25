@@ -1,27 +1,28 @@
 import { Router, Request, Response, NextFunction } from 'express';
+import ZippCodeClient from '../helpers/zippCode';
+import AxiosHttpClient from '../services/httpClient';
 
 const apiRouter = Router();
 
-const rateLimit = require('express-rate-limit');
-const slowDown = require('express-slow-down');
-
-const limiter = rateLimit({
-    windowMs: 30 * 1000,
-    max: 10
+apiRouter.get('/zippcode/:code', async (req: Request, res: Response) => {
+        try {
+            const zippCode = new ZippCodeClient();
+            const data = await zippCode.get(req.params.code);
+            return res.status(200).json(data);
+        } catch (error) {
+            return res.status(400).json({ message: error.message });
+        }
 });
 
-const speedLimiter = slowDown({
-    windowMs: 30 * 1000,
-    delayAfter: 1,
-    delayMs: 500
-})
+apiRouter.get('/', async (req: Request, res: Response) => {
+    const http = new AxiosHttpClient();
+    const response = await http.request({
+                        url: 'https://api.chucknorris.io/jokes/random',
+                        method: 'get'
+                    })
 
-apiRouter.get('*', limiter, speedLimiter, async (request: Request, response: Response, next: NextFunction) => {
-    next();
+    res.json(response);
 });
 
-apiRouter.get('/', async (request: Request, response: Response) => {
-    response.json('basic API')
-});
 
 export default apiRouter;
