@@ -2,6 +2,8 @@ import app from './app';
 import 'reflect-metadata';
 import './database';
 
-app.listen(3000, () => {
+const PORT: string|number = process.env.PORT || 5000;
+
+app.listen(PORT, () => {
   console.log('🏃 Running Server');
 });
