@@ -7,14 +7,8 @@ export class CreatePermissionsRoles1622584426586 implements MigrationInterface {
             new Table({
                 name: "permissions_roles",
                 columns: [
-                    {
-                        name: 'role_id',
-                        type: 'uuid'
-                    },
-                    {
-                        name: 'permission_id',
-                        type: 'uuid'
-                    }
+                    { name: 'role_id', type: 'uuid' },
+                    { name: 'permission_id', type: 'uuid' }
                 ]
             })
         )
@@ -34,7 +28,7 @@ export class CreatePermissionsRoles1622584426586 implements MigrationInterface {
         await queryRunner.createForeignKey(
             'permissions_roles',
             new TableForeignKey({
-                columnNames: ['permission_id'],
+                columnNames: ['role_id'],
                 referencedColumnNames: ['id'],
                 referencedTableName: 'roles',
                 name: 'fk_roles_permissions',

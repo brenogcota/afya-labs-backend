@@ -16,6 +16,7 @@ class RoleController {
             return response.status(400).json({err: "Role already exists"})
         }
 
+        // Verificando se as permissões existem
         const existsPermissions = await permissionRepository.findByIds(permissions);
 
         const role = roleRepository.create({
