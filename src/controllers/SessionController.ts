@@ -12,7 +12,10 @@ class SessionController {
 
         const userRepository = getCustomRepository(UserRepository);
 
-        const user = await userRepository.findOne({username});
+        const user = await userRepository.findOne(
+            { username },
+            { relations: ["roles"] }
+            );
 
         if(!user){
             return response.status(400).json({error : "User not found!"})
@@ -25,7 +28,9 @@ class SessionController {
             return response.status(400).json({ error: "Incorrect password or username"})
         }
 
-        const token = sign({}, "bfe9fa08d3470aa6bc8ff596f5347b0c", {
+        const roles = user.roles.map((role) => role.name);
+
+        const token = sign({ roles }, "bfe9fa08d3470aa6bc8ff596f5347b0c", {
             subject: user.id,
             expiresIn: '1d'
         });// params (payload = os dados que desejamos que fiquem armazedos no token, hash = a chave secreta, )

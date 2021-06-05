@@ -35,8 +35,10 @@ function is(role: String[]){
             return next();
         }
 
-        return response.status(401).json({ message: "Not authorized!"});
-
-        return roleAuthorized;
+        return response.status(401).json({ message: "Not authorized!"});        
     }
+
+    return roleAuthorized;
 }
+
+export { is };

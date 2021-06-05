@@ -13,7 +13,7 @@ class User {
     @Column()
     username: string;
 
-    @Column() // { select: false }
+    @Column()
     password?: string;
 
     @CreateDateColumn()

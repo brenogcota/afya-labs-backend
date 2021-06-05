@@ -20,6 +20,7 @@ class UserController {
 
         const passwordHashed = await hash(password, 8);
 
+        // Verifica se existe
         const existsRoles = await roleRepository.findByIds(roles);
 
         const user = userRepository.create({
