@@ -18,4 +18,6 @@ router.post('/products', is(["ROLE_ADMIN"]), ProductController.create);
 router.get('/products', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.index);
 router.get('/products/:id', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.show);
 
+
+
 export { router };
