@@ -17,6 +17,8 @@ export class CreateBloodType1622918627252 implements MigrationInterface {
                     {
                         name: 'tipo_sanguineo',
                         type: 'enum',
+                        enum: ['a+' , 'a-' , 'b+' , 'b-' , 'o+' , 'o-' , 'ab+' , 'ab-'],
+                        isNullable: false
                     },                    
                     {
                         name: 'created_at',

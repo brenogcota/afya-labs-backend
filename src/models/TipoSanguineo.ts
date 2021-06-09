@@ -1,19 +1,29 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-export type tipoSanguineo =  'a+' |  'a-' | 'b+' | 'b-' | 'o+' | 'o-' | 'ab+' |  'ab-' 
+enum TipoSanguineoEnum {
+  a = 'a+',
+  b = 'a-',
+  c = 'b+', 
+  d = 'b-',
+  e = 'o+',
+  f = 'o-',
+  g = 'ab+',
+  h = 'ab-'
+}
+
+export enum TipoDoSangue{
+  teste =  'teste',
+  testea= 'testea'
+}
 
 @Entity("blood_types") 
 
 export default class TipoSanguineo { 
   
-  @PrimaryGeneratedColumn()
-    id: number;
+  @PrimaryGeneratedColumn('uuid')
+    id: string;
 
     @Column({
-        type: "enum",
-        enum: [ 'a+',  'a-', 'b+', 'b-', 'o+', 'o-', 'ab+',  'ab-' ],
-        default: 'a+'
-    })
-    role: tipoSanguineo;
-
+      name: 'action', type: 'enum', enum: TipoDoSangue, default: TipoDoSangue.teste})
+    tipo_sanguineo: string;
 }
