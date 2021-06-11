@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateClient1622905533462 implements MigrationInterface {
+export class CreateChartsHistory1623439656372 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name:'clients',
+                name: 'charts_history',
                 columns: [
                     {
                         name: 'id',
@@ -15,41 +15,29 @@ export class CreateClient1622905533462 implements MigrationInterface {
                         default: 'uuid_generate_v4()'
                     },
                     {
-                        name: 'name',
-                        type: 'varchar'
+                        name: 'data',
+                        type: 'timestamp'
                     },
                     {
-                        name: 'cpf',
-                        type: 'varchar'
+                        name: 'hora',
+                        type: 'timestamp'
                     },
                     {
-                        name: 'telefone',
-                        type: 'varchar'
-                    },
-                    {
-                        name: 'celular',
-                        type: 'varchar'
-                    },
-                    {
-                        name: 'email',
-                        type: 'varchar'
-                    },
-                    {
-                        name: 'tipo_sanguineo',
+                        name: 'descrição',
                         type: 'varchar'
                     },
                     {
                         name: 'created_at',
                         type: 'timestamp',
                         default: 'now()'
-                    },
-                ],
+                    }
+                ]
             })
         )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("clients")
+        await queryRunner.dropTable('charts_history');
     }
 
 }

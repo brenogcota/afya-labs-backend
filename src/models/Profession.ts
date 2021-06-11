@@ -1,17 +1,18 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity("charts")
-class Chart {
+@Entity('professions')
+class Profession {
 
     @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
-    dataAbertura: Date;
+    nome: string;
 
     @CreateDateColumn()
     created_at: Date;
+
 }
 
-export default Chart;
+export default Profession;
