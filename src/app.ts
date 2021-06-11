@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 
-import routes from './routes';
+import { router } from './routes';
 import Middleware from './middlewares';
 
 const middleware = new Middleware();
@@ -18,7 +18,7 @@ app.use(helmet());
 app.use(cors());
 
 app.use(express.json());
-app.use(routes);
+app.use(router);
 
 app.use(middleware.notFound)
 app.use(middleware.errorHandler);
