@@ -8,15 +8,15 @@ module.exports = {
     "password": process.env.PASS,
     "database": process.env.DATABASE,
     "entities": [
-        "dist/models/**/*.js"
+        "src/models/**/*.ts"
     ],
     "migrations": [
-        "dist/database/migrations/**/*.js"
+        "src/database/migrations/**/*.ts"
     ],
     "cli": {
         "migrationsDir": [
-            "dist/database/migrations/"
+            "src/database/migrations/"
         ],
-        "entitiesDir": "dist/models"
+        "entitiesDir": "src/models"
     }
 };
