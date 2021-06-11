@@ -1,15 +1,6 @@
-<<<<<<< HEAD
 .idea/
 .vscode/
 node_modules/
 build/
 tmp/
 temp/
-=======
-.idea/
-.vscode/
-node_modules/
-build/
-tmp/
-temp/
->>>>>>> origin/developer
