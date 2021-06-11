@@ -4,7 +4,7 @@ import Role from './Role';
 @Entity("users")
 class User {
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column()

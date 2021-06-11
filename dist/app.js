@@ -1,0 +1,23 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const morgan = require('morgan');
+const helmet = require('helmet');
+const cors = require('cors');
+const routes_1 = require("./routes");
+const middlewares_1 = __importDefault(require("./middlewares"));
+const middleware = new middlewares_1.default();
+require('dotenv').config();
+const app = express_1.default();
+app.set('trust proxy', 1);
+app.use(morgan('dev'));
+app.use(helmet());
+app.use(cors());
+app.use(express_1.default.json());
+app.use(routes_1.router);
+app.use(middleware.notFound);
+app.use(middleware.errorHandler);
+exports.default = app;

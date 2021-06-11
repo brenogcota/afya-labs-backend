@@ -20,7 +20,7 @@ export enum TipoDoSangue{
 
 export default class TipoSanguineo { 
   
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
     id: string;
 
     @Column({

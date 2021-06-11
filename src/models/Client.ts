@@ -3,7 +3,7 @@ import { Column, CreateDateColumn, Entity, Long, PrimaryGeneratedColumn } from "
 @Entity("clients")
 class Client {
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column()

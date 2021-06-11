@@ -8,7 +8,7 @@ import {
 
 @Entity('class')
 export default class Class {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn()
   id: string;
 
   @Column({
