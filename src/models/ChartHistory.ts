@@ -1,17 +1,23 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity("charts")
-class Chart {
+@Entity("charts_history")
+class ChartHistory {
 
     @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
-    dataAbertura: Date;
+    data: Date;
+
+    @Column()
+    hora: Date;
+
+    @Column()
+    descrição: string;
 
     @CreateDateColumn()
     created_at: Date;
 }
 
-export default Chart;
+export default ChartHistory;

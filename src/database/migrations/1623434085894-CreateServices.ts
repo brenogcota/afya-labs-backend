@@ -1,11 +1,11 @@
 import {MigrationInterface, QueryRunner, Table} from "typeorm";
 
-export class CreateSpecialists1623429944025 implements MigrationInterface {
+export class CreateServices1623434085894 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
-                name: "specialists",
+                name: 'services',
                 columns: [
                     {
                         name: 'id',
@@ -15,24 +15,21 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
                         default: 'uuid_generate_v4()'
                     },
                     {
-                        name: 'registro',
-                        type: 'varchar'
+                        name: 'dataAgendamento',
+                        type: 'timestamp',
+                        default: 'now()'
                     },
                     {
-                        name: 'nome',
-                        type: 'varchar'
+                        name: 'dataAtendimento',
+                        type: 'timestamp'// não sei se é a melhor forma
                     },
                     {
-                        name: 'telefone',
-                        type: 'varchar'
+                        name: 'horaAtendimento',
+                        type: 'timestamp'
                     },
                     {
-                        name: 'celular',
-                        type: 'varchar'
-                    },
-                    {
-                        name: 'email',
-                        type: 'varchar'
+                        name: 'valor',
+                        type: 'varchar'// no diagrama estava indicando que era pra ser um typo Date???O.o
                     },
                     {
                         name: 'created_at',
@@ -45,7 +42,8 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("specialists");
+        await queryRunner.dropTable("services");
+
     }
 
 }

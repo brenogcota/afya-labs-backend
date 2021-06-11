@@ -1,30 +1,26 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 
-@Entity("specialists")
-class Specialist {
+@Entity("services")
+class Service {
 
     @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
-    registro: string;
+    dataAgendamento: Date;
 
     @Column()
-    nome: string;
+    dataAtendimento: Date;
 
     @Column()
-    telefone: string;
+    horaAtendimento: Date;
 
     @Column()
-    celular: string;
-
-    @Column()
-    email: string;
+    valor: Number;
 
     @CreateDateColumn()
     created_at: Date;
-
 }
 
-export default Specialist;
+export default Service;
