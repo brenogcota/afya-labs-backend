@@ -5,7 +5,7 @@ import PermissionController from './controllers/PermissionController';
 import RoleController from './controllers/RoleController';
 import ProductController from './controllers/ProductController';
 
-import { is } from './middlewares/permission';
+import { is } from './middleWares/permission';
 
 const router = Router();
 
