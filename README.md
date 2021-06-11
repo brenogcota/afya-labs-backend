@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Node, Express, TypeORM, Jest
 
 ### run
@@ -30,3 +31,6 @@ http://localhost:3000/class
 - supertest
 - ts-node-dev
 - typescript
+=======
+
+>>>>>>> origin/developer
