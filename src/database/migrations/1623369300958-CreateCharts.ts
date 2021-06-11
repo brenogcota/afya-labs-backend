@@ -16,7 +16,8 @@ export class CreateChart1623369300958 implements MigrationInterface {
                     },
                     {
                         name: 'dataAbertura',
-                        type: 'timestamp'
+                        type: 'timestamp',
+                        default: 'now()'  //????
                     },
                     {
                         name: 'created_at',

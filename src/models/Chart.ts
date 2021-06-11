@@ -11,7 +11,7 @@ class Chart {
     dataAbertura: Date;
 
     @Column()
-    creatd_at: Date;
+    created_at: Date;
 }
 
 export default Chart;

@@ -10,7 +10,7 @@ class AddressController {
         
         const { cep, logradouro, numero, bairro, localidade, uf } = request.body;
 
-        const address = addressRepository.create ({
+        const address = addressRepository.create({
             cep,
             logradouro,
             numero,
