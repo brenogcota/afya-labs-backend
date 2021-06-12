@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Profession from "./Profession";
 import Service from "./Service";
 
 
@@ -33,6 +34,9 @@ class Specialist {
         inverseJoinColumns: [{ name: 'service_id'}]
     })
     services: Service[]
+
+    @ManyToOne(() => Profession, profession => profession.specialists)
+    profession: Profession[]
 
 }
 
