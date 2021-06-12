@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Service from "./Service";
 
 
 @Entity("specialists")
@@ -24,6 +25,14 @@ class Specialist {
 
     @CreateDateColumn()
     created_at: Date;
+
+    @OneToMany(() => Service, service => service.client)
+    @JoinTable({
+        name: 'services_specialists',
+        joinColumns: [{ name: 'specialists_id'}],
+        inverseJoinColumns: [{ name: 'service_id'}]
+    })
+    services: Service[]
 
 }
 

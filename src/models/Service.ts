@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Client from "./Client";
+import Specialist from "./Specialist";
 
 
 @Entity("services")
@@ -25,6 +26,9 @@ class Service {
 
     @ManyToOne(() => Client, client => client.services)
     client: Client[]
+
+    @ManyToOne(() => Specialist, specialist => specialist.services)
+    specialist: Specialist[]
 }
 
 export default Service;
