@@ -6,7 +6,7 @@ export class CreateAddress1622997312783 implements MigrationInterface {
         
         await queryRunner.createTable(
             new Table({
-                name: "adresses",
+                name: "addresses",
                 columns: [
                     {
                         name: 'id',
