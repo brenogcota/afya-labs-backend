@@ -10,6 +10,37 @@ import ChartController from './controllers/ChartController';
 
 const router = Router();
 
+const rateLimit = require('express-rate-limit');
+const slowDown = require('express-slow-down');
+
+const limiter = rateLimit({
+    windowMs: 30 * 1000,
+    max: 10
+});
+
+const speedLimiter = slowDown({
+    windowMs: 30 * 1000,
+    delayAfter: 1,
+    delayMs: 500
+})
+
+/** Rate limiting */
+router.get('*', limiter, speedLimiter,(req, res, next) => next());
+
+router.get('/',(req, res) => res.json({"message": "is running.."}));
+
+import ZippCodeClient from './helpers/zippCode';
+router.get('/zippcode/:code', async (req, res) => {
+    try {
+        const zippCode = new ZippCodeClient();
+        const data = await zippCode.get(req.params.code);
+        return res.status(200).json(data);
+    } catch (error) {
+        return res.status(400).json({ message: error.message });
+    }
+});
+
+
 router.post('/users', UserController.create);
 router.post('/sessions', SessionController.create);
 router.post('/permissions', PermissionController.create);
