@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import ChartHistory from "./ChartHistory";
 import Client from "./Client";
 
 
@@ -21,6 +22,9 @@ class Chart {
         inverseJoinColumns: [{ name: 'client_id'}]
     })
     clients: Client[]
+
+    @ManyToOne(() => ChartHistory)
+    charts_history: ChartHistory[]
 }
 
 export default Chart;
