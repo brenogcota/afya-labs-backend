@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Address from "./Address";
+import Service from "./Service";
 import TipoSanguineo from "./TipoSanguineo";
 
 @Entity("clients")
@@ -39,6 +40,14 @@ class Client {
 
     @ManyToOne(() => TipoSanguineo, blood_type => blood_type.clients)
     blood_types: TipoSanguineo[]
+
+    @OneToMany(() => Service, service => service.client)
+    @JoinTable({
+        name: 'services_clients',
+        joinColumns: [{ name: 'client_id'}],
+        inverseJoinColumns: [{ name: 'service_id'}]
+    })
+    services: Service[]
 }
 
 export default Client;

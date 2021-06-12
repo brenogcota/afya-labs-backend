@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Client from "./Client";
 
 
 @Entity("services")
@@ -21,6 +22,9 @@ class Service {
 
     @CreateDateColumn()
     created_at: Date;
+
+    @ManyToOne(() => Client, client => client.services)
+    client: Client[]
 }
 
 export default Service;
