@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import Client from "./Client";
 
 enum TipoSanguineoEnum {
   a = 'a+',
@@ -17,13 +18,15 @@ export enum TipoDoSangue{
 }
 
 @Entity("blood_types") 
-
 export default class TipoSanguineo { 
   
   @PrimaryGeneratedColumn('uuid')
     id: string;
 
-    @Column({
-      name: 'action', type: 'enum', enum: TipoDoSangue, default: TipoDoSangue.teste})
-    tipo_sanguineo: string;
+  @Column({
+    name: 'action', type: 'enum', enum: TipoDoSangue, default: TipoDoSangue.teste})
+  tipo_sanguineo: string;
+
+  @OneToMany(() => Client, client => client.blood_types)
+  clients: Client[]
 }
