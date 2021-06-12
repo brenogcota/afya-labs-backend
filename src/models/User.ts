@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import Client from './Client';
 import Role from './Role';
 
 @Entity("users")
@@ -27,6 +28,14 @@ class User {
         inverseJoinColumns: [{ name: "role_id" }]
     })
     roles: Role[]
+
+    @OneToOne(() => Client)
+    @JoinTable({
+        name: 'users_clients',
+        joinColumns: [{ name: 'user_id'}],
+        inverseJoinColumns: [{ name: 'client_id'}]
+    })
+    clients: Client[]
 }
 
 export default User;
