@@ -7,6 +7,7 @@ import ProductController from './controllers/ProductController';
 
 import { is } from './middleWares/permission';
 import ChartController from './controllers/ChartController';
+import SpecialistController from './controllers/SpecialistController';
 
 const router = Router();
 
@@ -51,6 +52,7 @@ router.get('/products', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.index
 router.get('/products/:id', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.show);
 
 router.post('/charts', ChartController.create);
+router.post('/specialists', SpecialistController.create);
 
 
 
