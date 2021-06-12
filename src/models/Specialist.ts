@@ -37,6 +37,7 @@ class Specialist {
 
     @ManyToOne(() => Profession, profession => profession.specialists)
     profession: Profession[]
+    
 
 }
 
