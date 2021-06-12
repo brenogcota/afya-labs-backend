@@ -1,20 +1,9 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import Client from "./Client";
 
-enum TipoSanguineoEnum {
-  a = 'a+',
-  b = 'a-',
-  c = 'b+', 
-  d = 'b-',
-  e = 'o+',
-  f = 'o-',
-  g = 'ab+',
-  h = 'ab-'
-}
 
 export enum TipoDoSangue{
   teste =  'teste',
-  testea= 'testea'
 }
 
 @Entity("blood_types") 
