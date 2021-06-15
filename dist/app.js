@@ -15,7 +15,12 @@ const app = express_1.default();
 app.set('trust proxy', 1);
 app.use(morgan('dev'));
 app.use(helmet());
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3000',
+    credentials: true,
+    optionSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 app.use(express_1.default.json());
 app.use(routes_1.router);
 app.use(middleware.notFound);

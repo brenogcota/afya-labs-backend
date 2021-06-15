@@ -14,45 +14,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Client_1 = __importDefault(require("./Client"));
-let Address = class Address {
+const Address_1 = __importDefault(require("./Address"));
+let ClientAddress = class ClientAddress {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", String)
-], Address.prototype, "id", void 0);
+], ClientAddress.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Address.prototype, "cep", void 0);
+], ClientAddress.prototype, "address_id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Address.prototype, "logradouro", void 0);
+], ClientAddress.prototype, "client_id", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "numero", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "bairro", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "localidade", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "uf", void 0);
-__decorate([
-    typeorm_1.CreateDateColumn(),
-    __metadata("design:type", Date)
-], Address.prototype, "created_at", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => Client_1.default, client => client.addresses),
+    typeorm_1.OneToMany(() => Client_1.default, client => client.id),
+    typeorm_1.JoinTable({
+        name: 'client_Address',
+        joinColumns: [{ name: 'client_id' }],
+        inverseJoinColumns: [{ name: 'id' }]
+    }),
     __metadata("design:type", Array)
-], Address.prototype, "client", void 0);
-Address = __decorate([
-    typeorm_1.Entity("addresses")
-], Address);
-exports.default = Address;
+], ClientAddress.prototype, "clients", void 0);
+__decorate([
+    typeorm_1.OneToOne(() => Address_1.default, Address => Address.id),
+    typeorm_1.JoinTable({
+        name: 'Address_client',
+        joinColumns: [{ name: 'address_id' }],
+        inverseJoinColumns: [{ name: 'id' }]
+    }),
+    __metadata("design:type", Array)
+], ClientAddress.prototype, "address", void 0);
+ClientAddress = __decorate([
+    typeorm_1.Entity("clients")
+], ClientAddress);
+exports.default = ClientAddress;

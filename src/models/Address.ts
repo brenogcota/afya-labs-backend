@@ -1,4 +1,6 @@
+import { JoinTable } from "typeorm";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { ManyToMany } from "typeorm/decorator/relations/ManyToMany";
 import Client from "./Client";
 
 
@@ -28,8 +30,13 @@ class Address {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Client, client => client.addresses)
-    client: Client[]
+    @ManyToMany(() => Client)
+    @JoinTable({
+        name: "clients_addresses",
+        joinColumns: [{ name: "address_id"}],
+        inverseJoinColumns: [{ name: "client_id"}]
+    })
+    clients: Client[]
 
 }
 

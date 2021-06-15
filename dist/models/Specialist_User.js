@@ -13,46 +13,41 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const Client_1 = __importDefault(require("./Client"));
-let Address = class Address {
+const Specialist_1 = __importDefault(require("./Specialist"));
+const User_1 = __importDefault(require("./User"));
+let SpecialistUser = class SpecialistUser {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", String)
-], Address.prototype, "id", void 0);
+], SpecialistUser.prototype, "id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Address.prototype, "cep", void 0);
+], SpecialistUser.prototype, "user_id", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Address.prototype, "logradouro", void 0);
+], SpecialistUser.prototype, "specialist_id", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "numero", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "bairro", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "localidade", void 0);
-__decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Address.prototype, "uf", void 0);
-__decorate([
-    typeorm_1.CreateDateColumn(),
-    __metadata("design:type", Date)
-], Address.prototype, "created_at", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => Client_1.default, client => client.addresses),
+    typeorm_1.OneToMany(() => Specialist_1.default, client => client.id),
+    typeorm_1.JoinTable({
+        name: 'specialist_user',
+        joinColumns: [{ name: 'specialist_id' }],
+        inverseJoinColumns: [{ name: 'id' }]
+    }),
     __metadata("design:type", Array)
-], Address.prototype, "client", void 0);
-Address = __decorate([
-    typeorm_1.Entity("addresses")
-], Address);
-exports.default = Address;
+], SpecialistUser.prototype, "specialist", void 0);
+__decorate([
+    typeorm_1.OneToOne(() => User_1.default, user => user.id),
+    typeorm_1.JoinTable({
+        name: 'user_client',
+        joinColumns: [{ name: 'user_id' }],
+        inverseJoinColumns: [{ name: 'id' }]
+    }),
+    __metadata("design:type", Array)
+], SpecialistUser.prototype, "user", void 0);
+SpecialistUser = __decorate([
+    typeorm_1.Entity("clients")
+], SpecialistUser);
+exports.default = SpecialistUser;

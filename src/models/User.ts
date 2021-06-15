@@ -30,7 +30,7 @@ class User {
     })
     roles: Role[]
 
-    @OneToOne(() => Client)
+    @ManyToMany(() => Client)
     @JoinTable({
         name: 'users_clients',
         joinColumns: [{ name: 'user_id'}],

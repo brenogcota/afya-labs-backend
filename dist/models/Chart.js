@@ -8,8 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Client_1 = __importDefault(require("./Client"));
 let Chart = class Chart {
 };
 __decorate([
@@ -24,6 +28,15 @@ __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Chart.prototype, "created_at", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => Client_1.default),
+    typeorm_1.JoinTable({
+        name: 'charts_clients',
+        joinColumns: [{ name: 'chart_id' }],
+        inverseJoinColumns: [{ name: 'client_id' }]
+    }),
+    __metadata("design:type", Array)
+], Chart.prototype, "clients", void 0);
 Chart = __decorate([
     typeorm_1.Entity("charts")
 ], Chart);

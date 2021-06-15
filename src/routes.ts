@@ -8,6 +8,7 @@ import ProductController from './controllers/ProductController';
 import { is } from './middleWares/permission';
 import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
+import ClientController from './controllers/ClientController';
 
 const router = Router();
 
@@ -31,6 +32,7 @@ router.get('*', limiter, speedLimiter,(req, res, next) => next());
 router.get('/',(req, res) => res.json({"message": "is running.."}));
 
 import ZippCodeClient from './helpers/zippCode';
+import AddressController from './controllers/AddressController';
 router.get('/zippcode/:code', async (req, res) => {
     try {
         const zippCode = new ZippCodeClient();
@@ -53,8 +55,8 @@ router.get('/products/:id', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.s
 
 router.post('/charts', ChartController.create);
 router.post('/specialists', SpecialistController.create);
-
-
+router.post('/clients', ClientController.create);
+router.post('/addresses', AddressController.create);
 
 
 export { router };

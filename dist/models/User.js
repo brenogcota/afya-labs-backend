@@ -13,7 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Client_1 = __importDefault(require("./Client"));
 const Role_1 = __importDefault(require("./Role"));
+const Specialist_1 = __importDefault(require("./Specialist"));
 let User = class User {
 };
 __decorate([
@@ -45,6 +47,24 @@ __decorate([
     }),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
+__decorate([
+    typeorm_1.OneToOne(() => Client_1.default),
+    typeorm_1.JoinTable({
+        name: 'users_clients',
+        joinColumns: [{ name: 'user_id' }],
+        inverseJoinColumns: [{ name: 'client_id' }]
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "clients", void 0);
+__decorate([
+    typeorm_1.OneToOne(() => Specialist_1.default),
+    typeorm_1.JoinTable({
+        name: 'users_specialists',
+        joinColumns: [{ name: 'user_id' }],
+        inverseJoinColumns: [{ name: 'specialist_id' }]
+    }),
+    __metadata("design:type", Array)
+], User.prototype, "specialists", void 0);
 User = __decorate([
     typeorm_1.Entity("users")
 ], User);

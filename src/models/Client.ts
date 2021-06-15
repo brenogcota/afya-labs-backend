@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import Address from "./Address";
+import User from "./User";
 
 @Entity("clients")
 class Client {
@@ -28,13 +29,13 @@ class Client {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Address, address => address.client)
+    @ManyToMany(() => User)
     @JoinTable({
-        name: 'clients_addresses',
-        joinColumns: [{ name: 'client_id'}],
-        inverseJoinColumns: [{ name: 'address_id'}]
+        name: "users_clients",
+        joinColumns: [{ name: "client_id"}],
+        inverseJoinColumns: [{ name: "user_id"}]
     })
-    addresses: Address[]
+    users: User[]
 }
 
 export default Client;

@@ -5,7 +5,7 @@ const typeorm_1 = require("typeorm");
 class CreateAddress1622997312783 {
     async up(queryRunner) {
         await queryRunner.createTable(new typeorm_1.Table({
-            name: "adresses",
+            name: "addresses",
             columns: [
                 {
                     name: 'id',

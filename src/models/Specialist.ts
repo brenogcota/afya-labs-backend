@@ -1,5 +1,5 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
-
+import { Column, CreateDateColumn, Entity,  OneToOne, JoinTable, PrimaryGeneratedColumn, ManyToMany } from "typeorm";
+import User from "./User";
 
 @Entity("specialists")
 class Specialist {
@@ -24,6 +24,14 @@ class Specialist {
 
     @CreateDateColumn()
     created_at: Date;
+
+    @ManyToMany(() => User)
+    @JoinTable({
+        name: "users_specialists",
+        joinColumns: [{ name: "specialist_id"}],
+        inverseJoinColumns: [{ name: "user_id"}]
+    })
+    users: User[]
 
 }
 

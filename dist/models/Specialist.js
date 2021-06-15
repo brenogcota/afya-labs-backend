@@ -8,8 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const User_1 = __importDefault(require("./User"));
 let Specialist = class Specialist {
 };
 __decorate([
@@ -40,6 +44,15 @@ __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Specialist.prototype, "created_at", void 0);
+__decorate([
+    typeorm_1.OneToOne(() => User_1.default, user => user.id),
+    typeorm_1.JoinTable({
+        name: 'user_client',
+        joinColumns: [{ name: 'user_id' }],
+        inverseJoinColumns: [{ name: 'id' }]
+    }),
+    __metadata("design:type", Array)
+], Specialist.prototype, "user", void 0);
 Specialist = __decorate([
     typeorm_1.Entity("specialists")
 ], Specialist);
