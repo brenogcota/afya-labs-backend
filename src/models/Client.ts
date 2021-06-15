@@ -30,7 +30,7 @@ class Client {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Address, address => address.client)
+    @OneToMany(() => Address, address => address.clients)
     addresses: Address[]
 
     @ManyToOne(() => TipoSanguineo, blood_type => blood_type.clients)
