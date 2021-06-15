@@ -14,7 +14,7 @@ class Specialist {
     registro: string;
 
     @Column()
-    nome: string;
+    name: string;
 
     @Column()
     telefone: string;
