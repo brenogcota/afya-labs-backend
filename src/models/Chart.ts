@@ -16,11 +16,6 @@ class Chart {
     created_at: Date;
 
     @ManyToOne(() => Client)
-    @JoinTable({
-        name: 'charts_clients',
-        joinColumns: [{ name: 'chart_id'}],
-        inverseJoinColumns: [{ name: 'client_id'}]
-    })
     clients: Client[]
 
     @ManyToOne(() => ChartHistory)

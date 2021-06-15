@@ -31,22 +31,12 @@ class Client {
     created_at: Date;
 
     @OneToMany(() => Address, address => address.client)
-    @JoinTable({
-        name: 'clients_addresses',
-        joinColumns: [{ name: 'client_id'}],
-        inverseJoinColumns: [{ name: 'address_id'}]
-    })
     addresses: Address[]
 
     @ManyToOne(() => TipoSanguineo, blood_type => blood_type.clients)
     blood_types: TipoSanguineo[]
 
     @OneToMany(() => Service, service => service.client)
-    @JoinTable({
-        name: 'services_clients',
-        joinColumns: [{ name: 'client_id'}],
-        inverseJoinColumns: [{ name: 'service_id'}]
-    })
     services: Service[]
 }
 

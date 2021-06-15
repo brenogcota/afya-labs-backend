@@ -19,9 +19,6 @@ class ChartHistory {
 
     @CreateDateColumn()
     created_at: Date;
-
-    @ManyToMany(() => Specialist)
-    specialist: Specialist[]
 }
 
 export default ChartHistory;

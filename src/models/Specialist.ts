@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import ChartHistory from "./ChartHistory";
 import Profession from "./Profession";
 import Role from "./Role";
 import Service from "./Service";
@@ -46,6 +47,14 @@ class Specialist {
         inverseJoinColumns: [{ name: "role_id" }]
     })
     roles: Role[]
+
+    @ManyToMany(() => ChartHistory)
+    @JoinTable({
+        name: "specialists_chartsHist",
+        joinColumns: [{ name: "specialists_id" }],
+        inverseJoinColumns: [{ name: "chartsHist_id" }]
+    })
+    specialist: ChartHistory[]
 
 }
 
