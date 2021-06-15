@@ -1,4 +1,7 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Client from "./Client";
+import ServiceStatus from "./ServiceStatus";
+import Specialist from "./Specialist";
 
 
 @Entity("services")
@@ -21,6 +24,15 @@ class Service {
 
     @CreateDateColumn()
     created_at: Date;
+
+    @ManyToOne(() => Client, client => client.services)
+    client: Client[]
+
+    @ManyToOne(() => Specialist, specialist => specialist.services)
+    specialist: Specialist[]
+
+    @ManyToOne(() => ServiceStatus, status => status.services)
+    status: ServiceStatus[]
 }
 
 export default Service;

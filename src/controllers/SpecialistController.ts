@@ -7,26 +7,37 @@ class SpecialistController {
     
     async create(request: Request, response: Response){
         const specialistRepository = getCustomRepository(SpecialistRepository);
+
         const userRepository = getCustomRepository(UserRepository);
         
-        const { registro, nome, telefone, celular, email, users } = request.body;
+        const { registro, name, telefone, celular, email, users } = request.body;
+
 
         const existSpecialist = await specialistRepository.findOne({registro});
+
+        const findByName = await specialistRepository.findOne({name});
+
 
         if(existSpecialist) {
             return response.status(400).json({ message: 'Specialist already exists!' })
         }
 
+
         const existsUsers = await userRepository.findByIds(users);
 
         const specialist = specialistRepository.create({
             registro,//encontrar um jeito de fazer a confirmação
-            nome,
+            name,
             telefone,
             celular,
             email,
             users: existsUsers
-        })
+        });
+
+
+        if(findByName) {
+            return response.status(200).json(specialist)
+        }
 
         await specialistRepository.save(specialist);
 
