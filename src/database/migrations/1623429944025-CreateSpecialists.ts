@@ -19,7 +19,7 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
                         type: 'uuid' 
                     },
                     { 
-                        name: 'professions_id', 
+                        name: 'profession_id', 
                         type: 'uuid' 
                     },
                     {
@@ -63,22 +63,24 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
             })
         );
 
-        /* await queryRunner.createForeignKey(
-            "specialists",
+        await queryRunner.createForeignKey(
+            'specialists',
             new TableForeignKey({
-                columnNames: ['professions_id'],
+                columnNames: ['profession_id'],
                 referencedColumnNames: ['id'],
                 referencedTableName: 'professions',
-                name: 'fk_professions_specialists',
+                name: 'fk_specialist_profession',
                 onDelete: 'CASCADE',
                 onUpdate: 'SET NULL'
             })
-        ); */
+        )
+
+ 
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('specialists', 'fk_users_specialists');
-        /* await queryRunner.dropForeignKey('specialists', 'fk_professions_specialists'); */
+        await queryRunner.dropForeignKey('specialists', 'fk_specialist_profession');
 
         await queryRunner.dropTable("specialists");
     }

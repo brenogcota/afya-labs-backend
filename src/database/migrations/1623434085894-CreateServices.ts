@@ -22,6 +22,10 @@ export class CreateServices1623434085894 implements MigrationInterface {
                         name: 'clients_id', 
                         type: 'uuid' 
                     },
+                    { 
+                        name: 'status_id', 
+                        type: 'uuid' 
+                    },
                     {
                         name: 'dataAgendamento',
                         type: 'timestamp',
@@ -71,12 +75,24 @@ export class CreateServices1623434085894 implements MigrationInterface {
                 onUpdate: 'SET NULL'
             })
         )
+
+        await queryRunner.createForeignKey(
+            'services',
+            new TableForeignKey({
+                columnNames: ['status_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'service_status',
+                name: 'fk_status_services',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-
-        await queryRunner.dropForeignKey('services', 'fk_specialists_services');
         await queryRunner.dropForeignKey('services', 'fk_clients_services');
+        await queryRunner.dropForeignKey('services', 'fk_specialists_services');
+        await queryRunner.dropForeignKey('services', 'fk_status_services');
 
         await queryRunner.dropTable("services");
 

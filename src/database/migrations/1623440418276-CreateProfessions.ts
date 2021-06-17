@@ -14,10 +14,6 @@ export class CreateProfessions1623440418276 implements MigrationInterface {
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
                     },
-                    { 
-                        name: 'specialists_id', 
-                        type: 'uuid' 
-                    },
                     {
                         name: 'nome',
                         type: 'varchar'
@@ -31,21 +27,9 @@ export class CreateProfessions1623440418276 implements MigrationInterface {
             })
         )
 
-        await queryRunner.createForeignKey(
-            'professions',
-            new TableForeignKey({
-                columnNames: ['specialists_id'],
-                referencedColumnNames: ['id'],
-                referencedTableName: 'specialists',
-                name: 'fk_specialists_profession',
-                onDelete: 'CASCADE',
-                onUpdate: 'SET NULL'
-            })
-        )
     }
 
-    public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropForeignKey('professions', 'fk_specialists_profession');
+    public async down(queryRunner: QueryRunner): Promise<void> {        
 
         await queryRunner.dropTable('professions');
     }
