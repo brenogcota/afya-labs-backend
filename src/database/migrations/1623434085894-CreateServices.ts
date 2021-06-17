@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateServices1623434085894 implements MigrationInterface {
 
@@ -13,6 +13,14 @@ export class CreateServices1623434085894 implements MigrationInterface {
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
+                    },
+                    { 
+                        name: 'specialists_id', 
+                        type: 'uuid' 
+                    },
+                    { 
+                        name: 'clients_id', 
+                        type: 'uuid' 
                     },
                     {
                         name: 'dataAgendamento',
@@ -39,9 +47,37 @@ export class CreateServices1623434085894 implements MigrationInterface {
                 ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            'services',
+            new TableForeignKey({
+                columnNames: ['client_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'clients',
+                name: 'fk_clients_services',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        )
+
+        await queryRunner.createForeignKey(
+            'services',
+            new TableForeignKey({
+                columnNames: ['specialists_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'specialists',
+                name: 'fk_specialists_services',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+
+        await queryRunner.dropForeignKey('services', 'fk_specialists_services');
+        await queryRunner.dropForeignKey('services', 'fk_clients_services');
+
         await queryRunner.dropTable("services");
 
     }

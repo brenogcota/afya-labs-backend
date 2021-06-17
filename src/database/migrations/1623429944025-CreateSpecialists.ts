@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateSpecialists1623429944025 implements MigrationInterface {
 
@@ -13,6 +13,14 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
+                    },
+                    { 
+                        name: 'user_id', 
+                        type: 'uuid' 
+                    },
+                    { 
+                        name: 'professions_id', 
+                        type: 'uuid' 
                     },
                     {
                         name: 'registro',
@@ -42,9 +50,36 @@ export class CreateSpecialists1623429944025 implements MigrationInterface {
                 ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            "specialists",
+            new TableForeignKey({
+                columnNames: ['user_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                name: 'fk_users_specialists',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        );
+
+        /* await queryRunner.createForeignKey(
+            "specialists",
+            new TableForeignKey({
+                columnNames: ['professions_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'professions',
+                name: 'fk_professions_specialists',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        ); */
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropForeignKey('specialists', 'fk_users_specialists');
+        /* await queryRunner.dropForeignKey('specialists', 'fk_professions_specialists'); */
+
         await queryRunner.dropTable("specialists");
     }
 

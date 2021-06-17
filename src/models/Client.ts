@@ -1,7 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import Address from "./Address";
+import Chart from "./Chart";
 import Service from "./Service";
 import TipoSanguineo from "./TipoSanguineo";
+import User from "./User";
 
 @Entity("clients")
 class Client {
@@ -24,20 +26,23 @@ class Client {
     @Column()
     email: string;
 
-    @Column()
-    tipo_sanguineo: string;
+    /* @Column()
+    tipo_sanguineo: string; */
 
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Address, address => address.clients)
-    addresses: Address[]
-
-    @ManyToOne(() => TipoSanguineo, blood_type => blood_type.clients)
-    blood_types: TipoSanguineo[]
+    @ManyToOne(() => TipoSanguineo, tipo_sanguineo => tipo_sanguineo.clients)
+    tipo_sanguineo: TipoSanguineo[]
 
     @OneToMany(() => Service, service => service.client)
     services: Service[]
+    
+    @OneToOne(() => User, user => user.clients)
+    users: User[]
+
+    @OneToMany(() => Chart, charts => charts.client)
+    charts: Chart[]
 }
 
 export default Client;

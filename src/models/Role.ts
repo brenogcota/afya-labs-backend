@@ -1,5 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, ManyToMany, JoinTable } from "typeorm";
 import Permission from "./Permission";
+import Specialist from "./Specialist";
 
 
 

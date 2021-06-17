@@ -5,6 +5,7 @@
     "username": "postgres",
     "password": "mzhide",
     "database": "yt_permissions",
+    "synchronize": true,
     "entities": [
         "./src/models/*.ts"
     ],

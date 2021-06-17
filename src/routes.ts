@@ -8,6 +8,7 @@ import ProductController from './controllers/ProductController';
 import { is } from './middlewares/permission';
 import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
+import ClientController from './controllers/ClientController';
 
 const router = Router();
 
@@ -21,7 +22,10 @@ router.get('/products', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.index
 router.get('/products/:id', is(["ROLE_ADMIN", "ROLE_USER"]), ProductController.show);
 
 router.post('/charts', ChartController.create);
+//router.get('/charts', ChartController.index);
+router.post('/charts', ChartController.create);
 router.post('/specialists', SpecialistController.create);
+router.post('/clients', ClientController.create);
 
 
 

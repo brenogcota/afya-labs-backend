@@ -1,8 +1,9 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import ChartHistory from "./ChartHistory";
 import Profession from "./Profession";
 import Role from "./Role";
 import Service from "./Service";
+import User from "./User";
 
 
 @Entity("specialists")
@@ -30,11 +31,6 @@ class Specialist {
     created_at: Date;
 
     @OneToMany(() => Service, service => service.client)
-    @JoinTable({
-        name: 'services_specialists',
-        joinColumns: [{ name: 'specialists_id'}],
-        inverseJoinColumns: [{ name: 'service_id'}]
-    })
     services: Service[]
 
     @ManyToOne(() => Profession, profession => profession.specialists)
@@ -48,13 +44,16 @@ class Specialist {
     })
     roles: Role[]
 
+    @OneToOne(() => User, user => user.specialists)
+    users: User[]
+
     @ManyToMany(() => ChartHistory)
     @JoinTable({
         name: "specialists_chartsHist",
         joinColumns: [{ name: "specialists_id" }],
         inverseJoinColumns: [{ name: "chartsHist_id" }]
     })
-    specialist: ChartHistory[]
+    charts_history: ChartHistory[]
 
 }
 

@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateAddress1622997312783 implements MigrationInterface {
 
@@ -14,6 +14,10 @@ export class CreateAddress1622997312783 implements MigrationInterface {
                         isPrimary: true,
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
+                    },
+                    { 
+                        name: 'user_id', 
+                        type: 'uuid' 
                     },
                     {
                         name: 'cep',
@@ -47,10 +51,24 @@ export class CreateAddress1622997312783 implements MigrationInterface {
                 ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            'addresses',
+            new TableForeignKey({
+                columnNames: ['user_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'users',
+                name: 'fk_users_addresses',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        );
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable("adresses")
+        await queryRunner.dropForeignKey('addresses', 'fk_users_addresses');
+
+        await queryRunner.dropTable("addresses")
     }
 
 }

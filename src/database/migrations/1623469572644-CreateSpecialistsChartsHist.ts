@@ -31,7 +31,7 @@ export class CreateSpecialistsChartsHist1623469572644 implements MigrationInterf
                 columnNames: ['chartsHist_id'],
                 referencedColumnNames: ['id'],
                 referencedTableName: 'charts_history',
-                name: 'fks_chartsHist_specialist',
+                name: 'fk_chartsHist_specialist',
                 onDelete: 'CASCADE',
                 onUpdate: 'SET NULL'
             })
@@ -40,7 +40,7 @@ export class CreateSpecialistsChartsHist1623469572644 implements MigrationInterf
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.dropForeignKey('specialists_chartsHist', 'fk_specialists_chartsHist');
-        await queryRunner.dropForeignKey('specialists_chartsHist', 'fks_chartsHist_specialist');
+        await queryRunner.dropForeignKey('specialists_chartsHist', 'fk_chartsHist_specialist');
 
         await queryRunner.dropTable('specialists_chartsHist');
     }

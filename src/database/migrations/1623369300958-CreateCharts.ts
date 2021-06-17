@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class CreateChart1623369300958 implements MigrationInterface {
 
@@ -14,6 +14,10 @@ export class CreateChart1623369300958 implements MigrationInterface {
                         generationStrategy: 'uuid',
                         default: 'uuid_generate_v4()'
                     },
+                    { 
+                        name: 'client_id', 
+                        type: 'uuid'
+                    },
                     {
                         name: 'dataAbertura',
                         type: 'timestamp',
@@ -27,9 +31,23 @@ export class CreateChart1623369300958 implements MigrationInterface {
                 ]
             })
         )
+
+        await queryRunner.createForeignKey(
+            'charts',
+            new TableForeignKey({
+                columnNames: ['client_id'],
+                referencedColumnNames: ['id'],
+                referencedTableName: 'clients',
+                name: 'fk_client_charts',
+                onDelete: 'CASCADE',
+                onUpdate: 'SET NULL'
+            })
+        )
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.dropForeignKey('charts', 'fk_client_charts');
+
         await queryRunner.dropTable("charts")
     }
 

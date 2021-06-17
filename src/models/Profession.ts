@@ -15,11 +15,6 @@ class Profession {
     created_at: Date;
 
     @OneToMany(() => Specialist, specialist => specialist.profession)
-    @JoinTable({
-        name: 'specialists_professions',
-        joinColumns: [{ name: 'professions_id'}],
-        inverseJoinColumns: [{ name: 'specialists_id'}]
-    })
     specialists: Specialist[]
 }
 
