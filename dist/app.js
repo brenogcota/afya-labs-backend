@@ -25,4 +25,5 @@ app.use(express_1.default.json());
 app.use(routes_1.router);
 app.use(middleware.notFound);
 app.use(middleware.errorHandler);
+
 exports.default = app;

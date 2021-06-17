@@ -3,6 +3,9 @@ const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
 
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('../swagger.json');
+
 import { router } from './routes';
 import Middleware from './middlewares';
 
@@ -28,5 +31,7 @@ app.use(router);
 
 app.use(middleware.notFound)
 app.use(middleware.errorHandler);
+router.use('/api-docs', swaggerUi.serve);
+router.get('/api-docs', swaggerUi.setup(swaggerDocument));
 
 export default app;
