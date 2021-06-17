@@ -2,7 +2,7 @@ import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, One
 import Address from './Address';
 import Client from './Client';
 import Role from './Role';
-import Specialist from './Specialist';
+import Specialist from './Specialist'; 
 
 @Entity("users")
 class User {
@@ -24,21 +24,17 @@ class User {
 
 
     @ManyToMany(() => Role)
-    @JoinTable({
-        name: "users_roles",
-        joinColumns: [{ name: "user_id" }],
-        inverseJoinColumns: [{ name: "role_id" }]
-    })
+    @JoinTable()
     roles: Role[]
 
-    @OneToOne(() => Client, client => client.users)
-    clients: Client[]
+    @OneToOne(type => Client, users => User)
+    clients: Client
 
-    @OneToOne(() => Specialist, specialist => specialist.users)
-    specialists: Specialist[]
+    @OneToOne(type => Specialist, user => User)
+    specialist: Specialist
 
-    @OneToMany(() => Address, address => address.users)
-    addresses: Address[]
+    @OneToMany(() => Address, user => User)
+    addresses: Address[] 
 }
 
 export default User;

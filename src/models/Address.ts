@@ -1,5 +1,4 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
-import Client from "./Client";
 import User from "./User";
 
 
@@ -29,8 +28,8 @@ class Address {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => User, user => user.addresses)
-    users: User[]
+    @ManyToOne(() => User, addresses => Address)
+    user: User
 
 }
 

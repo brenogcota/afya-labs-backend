@@ -14,7 +14,7 @@ class Profession {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Specialist, specialist => specialist.profession)
+    @OneToMany(type => Specialist, profession => Profession) //, { eager: true }
     specialists: Specialist[]
 }
 

@@ -29,7 +29,7 @@ class ChartHistory {
     })
     specialists: Specialist[]
 
-    @OneToMany(() => Chart, charts => charts.charts_history)
+    @OneToMany(() => Chart, charts_history => ChartHistory)
     charts: Chart[]
 }
 

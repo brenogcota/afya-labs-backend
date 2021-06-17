@@ -15,11 +15,11 @@ class Chart {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Client, client => client.charts)
-    client: Client[]
+    @ManyToOne(() => Client, charts => Chart)
+    client: Client
 
-    @ManyToOne(() => ChartHistory, chart_history => chart_history.charts)
-    charts_history: ChartHistory[]
+    @ManyToOne(() => ChartHistory, charts => Chart)
+    charts_history: ChartHistory
 
 }
 

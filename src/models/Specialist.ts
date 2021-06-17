@@ -30,29 +30,21 @@ class Specialist {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Service, service => service.client)
+    @OneToMany(() => Service, specialist => Specialist)
     services: Service[]
 
-    @ManyToOne(() => Profession, profession => profession.specialists)
-    profession: Profession[]
+    @ManyToOne(type => Profession, specialists => Specialist)
+    profession: Profession
     
     @ManyToMany(() => Role)
-    @JoinTable({
-        name: "specialists_roles",
-        joinColumns: [{ name: "specialist_id" }],
-        inverseJoinColumns: [{ name: "role_id" }]
-    })
+    @JoinTable()
     roles: Role[]
 
-    @OneToOne(() => User, user => user.specialists)
-    users: User[]
+    @OneToOne(type => User, specialist => Specialist)
+    user: User
 
     @ManyToMany(() => ChartHistory)
-    @JoinTable({
-        name: "specialists_chartsHist",
-        joinColumns: [{ name: "specialists_id" }],
-        inverseJoinColumns: [{ name: "chartsHist_id" }]
-    })
+    @JoinTable()
     charts_history: ChartHistory[]
 
 }
