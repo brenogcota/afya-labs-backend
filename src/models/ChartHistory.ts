@@ -6,7 +6,7 @@ import Specialist from "./Specialist";
 @Entity("charts_history")
 class ChartHistory {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()

@@ -34,7 +34,7 @@ class User {
     specialist: Specialist
 
     @OneToMany(() => Address, user => User)
-    addresses: Address[] 
+    addresses: Address[]
 }
 
 export default User;

@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import Client from "./Client";
-//import ServiceStatus from "./ServiceStatus";
 import Specialist from "./Specialist";
 
 export enum Status {
@@ -13,7 +12,7 @@ export enum Status {
 @Entity("services")
 class Service {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -41,8 +40,8 @@ class Service {
     @ManyToOne(() => Client, services => Service)
     client: Client
 
-    @ManyToOne(() => Specialist, specialists => Specialist)
-    specialist: Specialist
+    @ManyToOne(() => Specialist, services => Service)
+    specialist: Specialist[]
 
 }
 

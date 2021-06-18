@@ -4,7 +4,7 @@ import User from "./User";
 
 @Entity("addresses")
 class Address {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()

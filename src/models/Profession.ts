@@ -5,7 +5,7 @@ import Specialist from "./Specialist";
 @Entity('professions')
 class Profession {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()

@@ -6,7 +6,7 @@ import Client from "./Client";
 @Entity("charts")
 class Chart {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
