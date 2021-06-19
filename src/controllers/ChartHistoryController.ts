@@ -16,7 +16,8 @@ class ChartHistoryController {
         const chartHistory = chartHistoryRepository.create({
             data,
             hora,
-            descrição
+            descrição,
+            charts
         });
 
         await chartHistoryRepository.save(chartHistory);
