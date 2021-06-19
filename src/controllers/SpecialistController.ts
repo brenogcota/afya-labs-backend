@@ -12,7 +12,7 @@ class SpecialistController {
         const userRepository = getCustomRepository(UserRepository);
         const roleRepository = getCustomRepository(RoleRepository);
 
-        const { registro, name, telefone, celular, email, user, profession, roles } = request.body;
+        const { registro, name, telefone, celular, email, profession, roles, user } = request.body;
 
         const existSpecialist = await specialistRepository.findOne({registro});        
 
@@ -39,19 +39,17 @@ class SpecialistController {
             user: existUser
         });
 
-        const findByName = await specialistRepository.find(name);
+        /* const findByName = await specialistRepository.find(name);
 
         if(findByName) {
             return response.status(200).json(specialist)
-        }
+        } */
        
 
         await specialistRepository.save(specialist);
 
-        return response.status(201).json(specialist)
+        return response.status(200).json(specialist)
     }
-
-    async index(request: Request, response: Response) {}
 }
 
 export default new SpecialistController;
