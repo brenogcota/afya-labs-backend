@@ -35,6 +35,7 @@ class User {
 
     @OneToMany(() => Address, user => User)
     addresses: Address[]
+
 }
 
 export default User;

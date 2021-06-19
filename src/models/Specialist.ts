@@ -40,7 +40,7 @@ class Specialist {
     roles: Role[]
 
     @OneToOne(type => User, specialist => Specialist)
-    user: User
+    user: User[]
 
     @ManyToMany(() => ChartHistory)
     @JoinTable()
