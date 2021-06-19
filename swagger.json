@@ -1,0 +1,753 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "API iConsultas",
+      "version": "0.0.1",
+      "title": "API iConsultas",
+      "contact": {
+        "email": "afyados@gmail.com"
+      }
+    },
+    "host": "localhost:5000",
+    "schemes": ["http"],
+    "paths": {
+      "/users": {
+        "get": {
+          "tags": ["Users"],
+          "summary": "Retorna os usuários da base",
+          "description": "Você deve estar autenticado para usar esta rota",
+          "operationId": "addPet",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Users"
+                }
+              }
+            },
+            "401": {
+              "description": "Usuário não autenticado"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Você deve passar o email e password no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateUserBody"
+              }
+            }
+          ],
+          "summary": "Cadastra um usuário na base",
+          "description": "",
+          "operationId": "add",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/CreateUser"
+                }
+              }
+            },
+            "409": {
+              "description": "Usuário já cadastrado"
+            }
+          }
+        }
+      },
+      "users/{id}": {
+        "put": {
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "Usuário a ser atualizado"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Os dados para serem atualizados devem ser passados no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateUser"
+              }
+            }
+          ],
+          "summary": "Atualiza o usuário",
+          "description": "",
+          "operationId": "updateClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar cadastrar p usuário"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Users"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "usuário a ser deletado",
+              "required": true
+            }
+          ],
+          "summary": "Deleta um usuário",
+          "description": "",
+          "operationId": "deleteClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar deletar especialista"
+            }
+          }
+        }
+      },
+      "/clients": {
+        "get": {
+          "tags": ["Clientes"],
+          "summary": "Retorna os clientes cadastrados",
+          "description": "Você deve estar autenticado para usar esta rota",
+          "operationId": "getClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Sucesso na operação",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Clients"
+                }
+              }
+            },
+            "401": {
+              "description": "Usuário não autenticado"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Clientes"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Os dados cadastrais devem ser passados no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateClient"
+              }
+            }
+          ],
+          "summary": "Cadastra um usuário na base",
+          "description": "",
+          "operationId": "addClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar cadastrar paciente"
+            }
+          }
+        }
+      },
+      "clients/{id}": {
+        "put": {
+          "tags": ["Clientes"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "do usuario a ser atualizado"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Os dados para serem atualizados devem ser passados no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/CreateClient"
+              }
+            }
+          ],
+          "summary": "Atualiza clientes existentes",
+          "description": "",
+          "operationId": "updateClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar cadastrar cliente"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Clientes"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "do cliente a ser deletado",
+              "required": true
+            }
+          ],
+          "summary": "Deleta um usuario",
+          "description": "",
+          "operationId": "deleteClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar deletar cliente"
+            }
+          }
+        }
+      },
+       "/specialist": {
+        "get": {
+          "tags": ["Especialistas"],
+          "summary": "Retorna os especialistas e suas especialidades cadastradas",
+          "description": "Você deve estar autenticado para usar esta rota",
+          "operationId": "getClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "Sucesso na operação",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Specialist"
+                }
+              }
+            },
+            "401": {
+              "description": "Usuário não autenticado"
+            }
+          }
+        },
+        "post": {
+          "tags": ["Especialistas"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Os dados cadastrais devem ser passados no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SpecialistBody"
+              }
+            }
+          ],
+          "summary": "Cadastra o especialista na base",
+          "description": "",
+          "operationId": "addClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar cadastrar paciente"
+            }
+          }
+        }
+      },
+      "specialist/{id}": {
+        "put": {
+          "tags": ["Especialistas"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "especialista a ser atualizado"
+            },
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Os dados para serem atualizados devem ser passados no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/SpecialistBody"
+              }
+            }
+          ],
+          "summary": "Atualiza o especialista",
+          "description": "",
+          "operationId": "updateClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar cadastrar p Especialista"
+            }
+          }
+        },
+        "delete": {
+          "tags": ["Especialistas"],
+          "parameters": [
+            {
+              "in": "header",
+              "name": "id",
+              "description": "Especialista a ser deletado",
+              "required": true
+            }
+          ],
+          "summary": "Deleta um especialista",
+          "description": "",
+          "operationId": "deleteClients",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation"
+            },
+            "400": {
+              "description": "Algo deu errado ao tentar deletar especialista"
+            }
+          }
+        }
+      },
+      
+      "/login": {
+        "post": {
+          "tags": ["Login"],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "body",
+              "description": "Você deve passar o email e password no body",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/LoginBody"
+              }
+            }
+          ],
+          "summary": "Realiza o login da aplicação",
+          "description": "",
+          "operationId": "login",
+          "consumes": ["application/json"],
+          "produces": ["application/json"],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/Login"
+                }
+              }
+            },
+            "401": {
+              "description": "Usuário não autorizado"
+            }
+          }
+        }
+      }
+    },
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "Users": {
+        "type": "object",
+        "required": ["name", "email", "password"],
+        "properties": {
+          "id": {
+            "type": "integr",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      },
+      "Clients": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "cellphone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "bloodtype": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "typeOf": {
+                "type": "string"
+              }
+            }
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "numberOf": {
+                "type": "string"
+              },
+              "postcode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Clients"
+        }
+      },
+      "CreateClient": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "cpf": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "cellphone": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "gender": {
+            "type": "string"
+          },
+          "bloodtype": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "numberOf": {
+                "type": "string"
+              },
+              "postcode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Clients"
+        }
+      },
+      "Login": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "user": {
+            "type": "object",
+            "id": {
+              "type": "integr",
+              "format": "uuid"
+            },
+            "name": {
+              "type": "string"
+            },
+            "email": {
+              "type": "string"
+            },
+            "password": {
+              "type": "string"
+            }
+          },
+          "token": {
+            "type": "oauth2"
+          }
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      },
+      "LoginBody": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      },
+      "CreateUser": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      },
+      "CreateUserBody": {
+        "type": "object",
+        "required": ["email", "password"],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "password": {
+            "type": "string"
+          }
+        },
+        "xml": {
+          "name": "Usuario"
+        }
+      },
+      "Specialist": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "registry": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "cell": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "specialties": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "specialty": {
+                "type": "string"
+              }
+            }
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "numberOf": {
+                "type": "string"
+              },
+              "postcode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "Specialist"
+        }
+      },
+      "SpecialistBody": {
+        "type": "object",
+        "properties": {
+          "registry": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "phone": {
+            "type": "string"
+          },
+          "cell": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string"
+          },
+          "specialties": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "specialty": {
+                "type": "string"
+              }
+            }
+          },
+          "address": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "format": "uuid"
+              },
+              "city": {
+                "type": "string"
+              },
+              "state": {
+                "type": "string"
+              },
+              "street": {
+                "type": "string"
+              },
+              "district": {
+                "type": "string"
+              },
+              "numberOf": {
+                "type": "string"
+              },
+              "postcode": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "xml": {
+          "name": "SpecialistBody"
+        }
+      }
+    },
+    "externalDocs": {
+      "description": "Find out more about Swagger",
+      "url": "http://swagger.io"
+    }
+  }
+  
