@@ -65,10 +65,6 @@ router.post('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
 router.post('/addresses', AddressController.create);
 
-<<<<<<< HEAD
-router.get('/specialists', SpecialistController.index);
-
-=======
->>>>>>> developer
+router.get('/specialists', SpecialistController.create);
 
 export { router };
