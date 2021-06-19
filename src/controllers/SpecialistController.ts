@@ -14,7 +14,7 @@ class SpecialistController {
         const { registro, name, telefone, celular, email, user } = request.body;
 
 
-        const existSpecialist = await specialistRepository.findOne({registro});
+        const existSpecialist = await specialistRepository.findOne({name});
 
 
         const findByName = await specialistRepository.find({name});
