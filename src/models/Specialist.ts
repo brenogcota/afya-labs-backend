@@ -1,4 +1,4 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import ChartHistory from "./ChartHistory";
 import Profession from "./Profession";
 import Role from "./Role";
@@ -41,6 +41,7 @@ class Specialist {
     roles: Role[]
 
     @OneToOne(type => User, specialist => Specialist)
+    @JoinColumn()
     user: User
 
     @ManyToMany(() => ChartHistory)
