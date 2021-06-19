@@ -4,9 +4,14 @@ import SessionController from './controllers/SessionController';
 import PermissionController from './controllers/PermissionController';
 import RoleController from './controllers/RoleController';
 
+
 import { is } from './middlewares/permission';
 
+import fs from 'fs';
+import marked from 'marked';
 
+//import { is } from './middleWares/permission';
+import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
 
@@ -29,7 +34,9 @@ const speedLimiter = slowDown({
 /** Rate limiting */
 router.get('*', limiter, speedLimiter,(req, res, next) => next());
 
-router.get('/',(req, res) => res.json({"message": "is running.."}));
+router.get('/',(req, res) => {
+    res.send('<h1>API is running...</h1>Questions? consult <a href="/docs/endpoints">Docs</a>')
+});
 
 import ZippCodeClient from './helpers/zippCode';
 import AddressController from './controllers/AddressController';
@@ -41,6 +48,12 @@ router.get('/zippcode/:code', async (req, res) => {
     } catch (error) {
         return res.status(400).json({ message: error.message });
     }
+});
+
+router.get('/docs/endpoints', (_, res) => {
+    var path = __dirname + '/docs/endpoints.md';
+    var file = fs.readFileSync(path, 'utf8');
+    res.send(marked(file.toString()));
 });
 
 
