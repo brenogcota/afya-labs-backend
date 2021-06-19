@@ -1,23 +1,26 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import ClientRepository from '../repositories/ClientRepository';
-import ServiceRepository from '../repositories/ServiceRepository';
-
+import UserRepository from '../repositories/UserRepository';
 
 class ClientController {
 
     async create(request: Request, response: Response){
         const clientRepository = getCustomRepository(ClientRepository);
-        const serviceRepository = getCustomRepository(ServiceRepository);
+        const userRepository = getCustomRepository(UserRepository);
 
-        const { name, cpf, telefone, celular, email, tipo_sanguineo, services } = request.body;
+        const { name, cpf, telefone, celular, email, tipo_sanguineo, users } = request.body;
 
         const existClient = await clientRepository.findOne({cpf});
 
-        const existService = await serviceRepository.findByIds(services)
+        const existUser = await userRepository.findOne(users);
 
         if(existClient) {
-            return response.status(400).json({ message: 'Client already exists!' })
+            return response.status(400).json({ message: 'Client already exist!' })
+        }
+
+        if(!existUser) {
+            return response.status(404).json({ message: 'User does not exist!' })
         }
 
         const client = clientRepository.create({
@@ -27,7 +30,7 @@ class ClientController {
             celular,
             email,
             tipo_sanguineo,
-            services: existService
+            users: existUser,
         });
 
         await clientRepository.save(client);
