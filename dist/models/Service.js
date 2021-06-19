@@ -11,15 +11,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var Service_1;
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Status = void 0;
 const typeorm_1 = require("typeorm");
 const Client_1 = __importDefault(require("./Client"));
-const ServiceStatus_1 = __importDefault(require("./ServiceStatus"));
 const Specialist_1 = __importDefault(require("./Specialist"));
-let Service = class Service {
+var Status;
+(function (Status) {
+    Status["AGENDADO"] = "agendado";
+    Status["REALIZADO"] = "realizado";
+    Status["CANCELADO"] = "cancelado";
+})(Status = exports.Status || (exports.Status = {}));
+let Service = Service_1 = class Service {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
 ], Service.prototype, "id", void 0);
 __decorate([
@@ -39,22 +46,26 @@ __decorate([
     __metadata("design:type", Number)
 ], Service.prototype, "valor", void 0);
 __decorate([
+    typeorm_1.Column({
+        type: "enum",
+        enum: Status,
+        default: Status.AGENDADO
+    }),
+    __metadata("design:type", String)
+], Service.prototype, "status", void 0);
+__decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Service.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => Client_1.default, client => client.services),
-    __metadata("design:type", Array)
+    typeorm_1.ManyToOne(() => Client_1.default, services => Service_1),
+    __metadata("design:type", Client_1.default)
 ], Service.prototype, "client", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => Specialist_1.default, specialist => specialist.services),
+    typeorm_1.ManyToOne(() => Specialist_1.default, services => Service_1),
     __metadata("design:type", Array)
 ], Service.prototype, "specialist", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => ServiceStatus_1.default, status => status.services),
-    __metadata("design:type", Array)
-], Service.prototype, "status", void 0);
-Service = __decorate([
+Service = Service_1 = __decorate([
     typeorm_1.Entity("services")
 ], Service);
 exports.default = Service;

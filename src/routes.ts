@@ -4,22 +4,11 @@ import SessionController from './controllers/SessionController';
 import PermissionController from './controllers/PermissionController';
 import RoleController from './controllers/RoleController';
 
-<<<<<<< HEAD
-
-import { is } from './middlewares/permission';
-
-import fs from 'fs';
-import marked from 'marked';
-
-//import { is } from './middleWares/permission';
-import ChartController from './controllers/ChartController';
-=======
 import fs from 'fs';
 import marked from 'marked';
 
 import { is } from './middleWares/permission';
 //import ChartController from './controllers/ChartController';
->>>>>>> 089171f9d325dd11ae119af8779e789fdb121132
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
 
@@ -72,15 +61,10 @@ router.post('/roles', RoleController.create);
 
 
 router.post('/specialists', SpecialistController.create);
-<<<<<<< HEAD
-
-router.post('/clients', ClientController.create);
-
-
-=======
 router.post('/clients', ClientController.create);
 router.post('/addresses', AddressController.create);
->>>>>>> 089171f9d325dd11ae119af8779e789fdb121132
+
+router.get('/specialists', SpecialistController.index);
 
 
 export { router };
