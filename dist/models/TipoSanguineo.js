@@ -8,24 +8,16 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.TipoDoSangue = void 0;
 const typeorm_1 = require("typeorm");
-var TipoSanguineoEnum;
-(function (TipoSanguineoEnum) {
-    TipoSanguineoEnum["a"] = "a+";
-    TipoSanguineoEnum["b"] = "a-";
-    TipoSanguineoEnum["c"] = "b+";
-    TipoSanguineoEnum["d"] = "b-";
-    TipoSanguineoEnum["e"] = "o+";
-    TipoSanguineoEnum["f"] = "o-";
-    TipoSanguineoEnum["g"] = "ab+";
-    TipoSanguineoEnum["h"] = "ab-";
-})(TipoSanguineoEnum || (TipoSanguineoEnum = {}));
+const Client_1 = __importDefault(require("./Client"));
 var TipoDoSangue;
 (function (TipoDoSangue) {
     TipoDoSangue["teste"] = "teste";
-    TipoDoSangue["testea"] = "testea";
 })(TipoDoSangue = exports.TipoDoSangue || (exports.TipoDoSangue = {}));
 let TipoSanguineo = class TipoSanguineo {
 };
@@ -39,6 +31,10 @@ __decorate([
     }),
     __metadata("design:type", String)
 ], TipoSanguineo.prototype, "tipo_sanguineo", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Client_1.default, client => client.tipo_sanguineo),
+    __metadata("design:type", Array)
+], TipoSanguineo.prototype, "clients", void 0);
 TipoSanguineo = __decorate([
     typeorm_1.Entity("blood_types")
 ], TipoSanguineo);

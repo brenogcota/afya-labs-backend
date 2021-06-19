@@ -13,6 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const ChartHistory_1 = __importDefault(require("./ChartHistory"));
 const Client_1 = __importDefault(require("./Client"));
 let Chart = class Chart {
 };
@@ -30,13 +31,12 @@ __decorate([
 ], Chart.prototype, "created_at", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => Client_1.default),
-    typeorm_1.JoinTable({
-        name: 'charts_clients',
-        joinColumns: [{ name: 'chart_id' }],
-        inverseJoinColumns: [{ name: 'client_id' }]
-    }),
     __metadata("design:type", Array)
 ], Chart.prototype, "clients", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => ChartHistory_1.default),
+    __metadata("design:type", Array)
+], Chart.prototype, "charts_history", void 0);
 Chart = __decorate([
     typeorm_1.Entity("charts")
 ], Chart);

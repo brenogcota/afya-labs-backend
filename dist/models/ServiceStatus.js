@@ -12,32 +12,30 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Status = void 0;
 const typeorm_1 = require("typeorm");
-const Specialist_1 = __importDefault(require("./Specialist"));
-let Profession = class Profession {
+const Service_1 = __importDefault(require("./Service"));
+var Status;
+(function (Status) {
+    Status["teste"] = "agendado";
+})(Status = exports.Status || (exports.Status = {}));
+let ServiceStatus = class ServiceStatus {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
     __metadata("design:type", String)
-], Profession.prototype, "id", void 0);
+], ServiceStatus.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Profession.prototype, "nome", void 0);
-__decorate([
-    typeorm_1.CreateDateColumn(),
-    __metadata("design:type", Date)
-], Profession.prototype, "created_at", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => Specialist_1.default, specialist => specialist.profession),
-    typeorm_1.JoinTable({
-        name: 'specialists_professions',
-        joinColumns: [{ name: 'professions_id' }],
-        inverseJoinColumns: [{ name: 'specialists_id' }]
+    typeorm_1.Column({
+        name: 'action', type: 'enum', enum: Status, default: Status.teste
     }),
+    __metadata("design:type", String)
+], ServiceStatus.prototype, "status", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Service_1.default, service => service.status),
     __metadata("design:type", Array)
-], Profession.prototype, "specialists", void 0);
-Profession = __decorate([
-    typeorm_1.Entity('professions')
-], Profession);
-exports.default = Profession;
+], ServiceStatus.prototype, "services", void 0);
+ServiceStatus = __decorate([
+    typeorm_1.Entity("service_status")
+], ServiceStatus);
+exports.default = ServiceStatus;

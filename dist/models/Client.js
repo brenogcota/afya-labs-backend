@@ -13,7 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const User_1 = __importDefault(require("./User"));
 const Address_1 = __importDefault(require("./Address"));
+const Service_1 = __importDefault(require("./Service"));
+const TipoSanguineo_1 = __importDefault(require("./TipoSanguineo"));
 let Client = class Client {
 };
 __decorate([
@@ -46,22 +49,30 @@ __decorate([
     __metadata("design:type", String)
 ], Client.prototype, "tipo_sanguineo", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
-], Client.prototype, "user_id", void 0);
-__decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Client.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => Address_1.default, address => address.client),
+    typeorm_1.ManyToMany(() => User_1.default),
     typeorm_1.JoinTable({
-        name: 'clients_addresses',
-        joinColumns: [{ name: 'client_id' }],
-        inverseJoinColumns: [{ name: 'address_id' }]
+        name: "users_clients",
+        joinColumns: [{ name: "client_id" }],
+        inverseJoinColumns: [{ name: "user_id" }]
     }),
     __metadata("design:type", Array)
+], Client.prototype, "users", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Address_1.default, address => address.clients),
+    __metadata("design:type", Array)
 ], Client.prototype, "addresses", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => TipoSanguineo_1.default, blood_type => blood_type.clients),
+    __metadata("design:type", Array)
+], Client.prototype, "blood_types", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Service_1.default, service => service.client),
+    __metadata("design:type", Array)
+], Client.prototype, "services", void 0);
 Client = __decorate([
     typeorm_1.Entity("clients")
 ], Client);

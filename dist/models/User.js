@@ -48,7 +48,7 @@ __decorate([
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
 __decorate([
-    typeorm_1.OneToOne(() => Client_1.default),
+    typeorm_1.ManyToMany(() => Client_1.default),
     typeorm_1.JoinTable({
         name: 'users_clients',
         joinColumns: [{ name: 'user_id' }],

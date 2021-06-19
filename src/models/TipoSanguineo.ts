@@ -10,12 +10,12 @@ export enum TipoDoSangue{
 export default class TipoSanguineo { 
   
   @PrimaryGeneratedColumn()
-    id: string;
+  id: string;
 
   @Column({
-    name: 'action', type: 'enum', enum: TipoDoSangue, default: TipoDoSangue.teste})
+  name: 'action', type: 'enum', enum: TipoDoSangue, default: TipoDoSangue.teste})
   tipo_sanguineo: string;
 
-  @OneToMany(() => Client, client => client.blood_types)
+  @OneToMany(() => Client, client => client.tipo_sanguineo)
   clients: Client[]
 }
