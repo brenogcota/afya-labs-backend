@@ -11,6 +11,7 @@ import marked from 'marked';
 //import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
+import ProfessionController from './controllers/ProfessionController';
 
 const router = Router();
 
@@ -58,13 +59,16 @@ router.post('/users', UserController.create);
 router.post('/sessions', SessionController.create);
 router.post('/permissions', PermissionController.create);
 router.post('/roles', RoleController.create);
-
+router.post('/professions', ProfessionController.create);
 
 router.post('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
 router.post('/addresses', AddressController.create);
 
+<<<<<<< HEAD
 router.get('/specialists', SpecialistController.index);
 
+=======
+>>>>>>> developer
 
 export { router };

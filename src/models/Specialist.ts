@@ -33,7 +33,7 @@ class Specialist {
     services: Service[]
 
     @ManyToOne(type => Profession, specialists => Specialist)
-    profession: Profession[]
+    profession: Profession
     
     @ManyToMany(() => Role)
     @JoinTable()

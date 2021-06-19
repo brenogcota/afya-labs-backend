@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class CreateSevices1624058453686 implements MigrationInterface {
-    name = 'CreateSevices1624058453686'
+export class CreateCreateServices1624138879031 implements MigrationInterface {
+    name = 'CreateCreateServices1624138879031'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TYPE "services_status_enum" AS ENUM('agendado', 'realizado', 'cancelado')`);
