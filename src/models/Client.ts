@@ -50,7 +50,6 @@ class Client {
 
     @OneToMany(() => Chart, client => Client)
     charts: Chart[]
-
 }
 
 export default Client;

@@ -14,6 +14,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const User_1 = __importDefault(require("./User"));
+const ChartHistory_1 = __importDefault(require("./ChartHistory"));
+const Profession_1 = __importDefault(require("./Profession"));
+const Role_1 = __importDefault(require("./Role"));
+const Service_1 = __importDefault(require("./Service"));
 let Specialist = class Specialist {
 };
 __decorate([
@@ -27,7 +31,7 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Specialist.prototype, "nome", void 0);
+], Specialist.prototype, "name", void 0);
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
@@ -45,14 +49,45 @@ __decorate([
     __metadata("design:type", Date)
 ], Specialist.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.OneToOne(() => User_1.default, user => user.id),
+    typeorm_1.ManyToMany(() => User_1.default),
     typeorm_1.JoinTable({
-        name: 'user_client',
-        joinColumns: [{ name: 'user_id' }],
-        inverseJoinColumns: [{ name: 'id' }]
+        name: "users_specialists",
+        joinColumns: [{ name: "specialist_id" }],
+        inverseJoinColumns: [{ name: "user_id" }]
     }),
     __metadata("design:type", Array)
-], Specialist.prototype, "user", void 0);
+], Specialist.prototype, "users", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Service_1.default, service => service.client),
+    typeorm_1.JoinTable({
+        name: 'services_specialists',
+        joinColumns: [{ name: 'specialists_id' }],
+        inverseJoinColumns: [{ name: 'service_id' }]
+    }),
+    __metadata("design:type", Array)
+], Specialist.prototype, "services", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => Profession_1.default, profession => profession.specialists),
+    __metadata("design:type", Array)
+], Specialist.prototype, "profession", void 0);
+__decorate([
+    typeorm_1.ManyToMany(() => Role_1.default),
+    typeorm_1.JoinTable({
+        name: "specialists_roles",
+        joinColumns: [{ name: "specialist_id" }],
+        inverseJoinColumns: [{ name: "role_id" }]
+    }),
+    __metadata("design:type", Array)
+], Specialist.prototype, "roles", void 0);
+__decorate([
+    typeorm_1.ManyToMany(() => ChartHistory_1.default),
+    typeorm_1.JoinTable({
+        name: "specialists_chartsHist",
+        joinColumns: [{ name: "specialists_id" }],
+        inverseJoinColumns: [{ name: "chartsHist_id" }]
+    }),
+    __metadata("design:type", Array)
+], Specialist.prototype, "specialist", void 0);
 Specialist = __decorate([
     typeorm_1.Entity("specialists")
 ], Specialist);

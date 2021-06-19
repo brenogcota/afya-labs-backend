@@ -3,8 +3,6 @@ import { getCustomRepository } from 'typeorm';
 import ClientRepository from '../repositories/ClientRepository';
 import ServiceRepository from '../repositories/ServiceRepository';
 
-
-
 class ClientController {
 
     async create(request: Request, response: Response){

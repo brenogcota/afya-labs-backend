@@ -19,7 +19,7 @@ class CreateSpecialists1623429944025 {
                     type: 'varchar'
                 },
                 {
-                    name: 'nome',
+                    name: 'name',
                     type: 'varchar'
                 },
                 {

@@ -13,46 +13,53 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const typeorm_2 = require("typeorm");
+const ManyToMany_1 = require("typeorm/decorator/relations/ManyToMany");
 const Client_1 = __importDefault(require("./Client"));
 let Address = class Address {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_2.PrimaryGeneratedColumn(),
     __metadata("design:type", String)
 ], Address.prototype, "id", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "cep", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "logradouro", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "numero", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "bairro", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "localidade", void 0);
 __decorate([
-    typeorm_1.Column(),
+    typeorm_2.Column(),
     __metadata("design:type", String)
 ], Address.prototype, "uf", void 0);
 __decorate([
-    typeorm_1.CreateDateColumn(),
+    typeorm_2.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Address.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => Client_1.default, client => client.addresses),
+    ManyToMany_1.ManyToMany(() => Client_1.default),
+    typeorm_1.JoinTable({
+        name: "clients_addresses",
+        joinColumns: [{ name: "address_id" }],
+        inverseJoinColumns: [{ name: "client_id" }]
+    }),
     __metadata("design:type", Array)
-], Address.prototype, "client", void 0);
+], Address.prototype, "clients", void 0);
 Address = __decorate([
-    typeorm_1.Entity("addresses")
+    typeorm_2.Entity("addresses")
 ], Address);
 exports.default = Address;

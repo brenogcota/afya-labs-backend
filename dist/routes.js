@@ -10,6 +10,8 @@ const SessionController_1 = __importDefault(require("./controllers/SessionContro
 const PermissionController_1 = __importDefault(require("./controllers/PermissionController"));
 const RoleController_1 = __importDefault(require("./controllers/RoleController"));
 const ProductController_1 = __importDefault(require("./controllers/ProductController"));
+const fs_1 = __importDefault(require("fs"));
+const marked_1 = __importDefault(require("marked"));
 const permission_1 = require("./middleWares/permission");
 const ChartController_1 = __importDefault(require("./controllers/ChartController"));
 const SpecialistController_1 = __importDefault(require("./controllers/SpecialistController"));
@@ -29,8 +31,11 @@ const speedLimiter = slowDown({
 });
 /** Rate limiting */
 router.get('*', limiter, speedLimiter, (req, res, next) => next());
-router.get('/', (req, res) => res.json({ "message": "is running.." }));
+router.get('/', (req, res) => {
+    res.send('<h1>API is running...</h1>Questions? consult <a href="/docs/endpoints">Docs</a>');
+});
 const zippCode_1 = __importDefault(require("./helpers/zippCode"));
+const AddressController_1 = __importDefault(require("./controllers/AddressController"));
 router.get('/zippcode/:code', async (req, res) => {
     try {
         const zippCode = new zippCode_1.default();
@@ -41,6 +46,11 @@ router.get('/zippcode/:code', async (req, res) => {
         return res.status(400).json({ message: error.message });
     }
 });
+router.get('/docs/endpoints', (_, res) => {
+    var path = __dirname + '/docs/endpoints.md';
+    var file = fs_1.default.readFileSync(path, 'utf8');
+    res.send(marked_1.default(file.toString()));
+});
 router.post('/users', UserController_1.default.create);
 router.post('/sessions', SessionController_1.default.create);
 router.post('/permissions', PermissionController_1.default.create);
@@ -50,4 +60,5 @@ router.get('/products', permission_1.is(["ROLE_ADMIN", "ROLE_USER"]), ProductCon
 router.get('/products/:id', permission_1.is(["ROLE_ADMIN", "ROLE_USER"]), ProductController_1.default.show);
 router.post('/charts', ChartController_1.default.create);
 router.post('/specialists', SpecialistController_1.default.create);
-router.post('/client', ClientController_1.default.create);
+router.post('/clients', ClientController_1.default.create);
+router.post('/addresses', AddressController_1.default.create);

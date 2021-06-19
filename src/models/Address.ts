@@ -2,8 +2,6 @@ import { JoinTable } from "typeorm";
 import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import User from "./User";
 
-
-
 @Entity("addresses")
 class Address {
     @PrimaryGeneratedColumn('uuid')
