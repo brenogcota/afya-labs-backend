@@ -50,6 +50,8 @@ class SpecialistController {
 
         return response.status(201).json(specialist)
     }
+
+    async index(request: Request, response: Response) {}
 }
 
 export default new SpecialistController;

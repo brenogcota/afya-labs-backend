@@ -14,6 +14,8 @@ class AddressController {
 
         const existsUsers = await userRepository.findByIds(users);
 
+        console.log(existsUsers);
+
         const address = addressRepository.create({
             cep,
             logradouro,
@@ -21,8 +23,10 @@ class AddressController {
             bairro,
             localidade,
             uf,
-            user: existsUsers
+            user: existsUsers[0]
         });
+
+        console.log(address)
 
         await addressRepository.save(address);
 
