@@ -5,7 +5,7 @@ import Specialist from "./Specialist";
 @Entity('professions')
 class Profession {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -14,12 +14,7 @@ class Profession {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(() => Specialist, specialist => specialist.profession)
-    @JoinTable({
-        name: 'specialists_professions',
-        joinColumns: [{ name: 'professions_id'}],
-        inverseJoinColumns: [{ name: 'specialists_id'}]
-    })
+    @OneToMany(type => Specialist, profession => Profession) //, { eager: true }
     specialists: Specialist[]
 }
 

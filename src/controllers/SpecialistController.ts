@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
+//import ProfessionRepository from '../repositories/ProfessionRepository';
 import SpecialistRepository from '../repositories/SpecialistRepository';
 import UserRepository from '../repositories/UserRepository';
 
@@ -15,7 +16,8 @@ class SpecialistController {
 
         const existSpecialist = await specialistRepository.findOne({registro});
 
-        const findByName = await specialistRepository.findOne({name});
+
+        const findByName = await specialistRepository.find({name});
 
 
         if(existSpecialist) {

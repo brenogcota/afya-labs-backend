@@ -6,7 +6,7 @@ import Client from "./Client";
 @Entity("charts")
 class Chart {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -15,11 +15,12 @@ class Chart {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToOne(() => Client)
-    clients: Client[]
+    @ManyToOne(() => Client, charts => Chart)
+    client: Client
 
-    @ManyToOne(() => ChartHistory)
-    charts_history: ChartHistory[]
+    @ManyToOne(() => ChartHistory, charts => Chart)
+    charts_history: ChartHistory
+
 }
 
 export default Chart;
