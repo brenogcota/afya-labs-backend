@@ -45,6 +45,14 @@ class SpecialistController {
 
         return response.status(201).json(specialist)
     }
+
+    async index(request: Request, response: Response) {
+        const specialistRepository = getCustomRepository(SpecialistRepository);
+
+        const specialist = specialistRepository.find();
+
+        return response.status(200).json(specialist);
+    }
 }
 
 export default new SpecialistController;

@@ -64,5 +64,7 @@ router.post('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
 router.post('/addresses', AddressController.create);
 
+router.get('/specialists', SpecialistController.index);
+
 
 export { router };
