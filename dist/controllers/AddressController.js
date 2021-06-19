@@ -5,13 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const AddressRepository_1 = __importDefault(require("../repositories/AddressRepository"));
-const ClientRepository_1 = __importDefault(require("../repositories/ClientRepository"));
+const UserRepository_1 = __importDefault(require("../repositories/UserRepository"));
 class AddressController {
     async create(request, response) {
         const addressRepository = typeorm_1.getCustomRepository(AddressRepository_1.default);
-        const clientRepository = typeorm_1.getCustomRepository(ClientRepository_1.default);
-        const { cep, logradouro, numero, bairro, localidade, uf, clients } = request.body;
-        const existsClients = await clientRepository.findByIds(clients);
+        const userRepository = typeorm_1.getCustomRepository(UserRepository_1.default);
+        const { cep, logradouro, numero, bairro, localidade, uf, users } = request.body;
+        const existsUsers = await userRepository.findByIds(users);
         const address = addressRepository.create({
             cep,
             logradouro,
@@ -19,7 +19,7 @@ class AddressController {
             bairro,
             localidade,
             uf,
-            clients: existsClients
+            user: existsUsers
         });
         await addressRepository.save(address);
         return response.json(address);

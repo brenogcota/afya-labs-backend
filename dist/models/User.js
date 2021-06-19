@@ -11,12 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var User_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
+const Address_1 = __importDefault(require("./Address"));
 const Client_1 = __importDefault(require("./Client"));
 const Role_1 = __importDefault(require("./Role"));
 const Specialist_1 = __importDefault(require("./Specialist"));
-let User = class User {
+let User = User_1 = class User {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
@@ -40,32 +42,22 @@ __decorate([
 ], User.prototype, "created_at", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Role_1.default),
-    typeorm_1.JoinTable({
-        name: "users_roles",
-        joinColumns: [{ name: "user_id" }],
-        inverseJoinColumns: [{ name: "role_id" }]
-    }),
+    typeorm_1.JoinTable(),
     __metadata("design:type", Array)
 ], User.prototype, "roles", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Client_1.default),
-    typeorm_1.JoinTable({
-        name: 'users_clients',
-        joinColumns: [{ name: 'user_id' }],
-        inverseJoinColumns: [{ name: 'client_id' }]
-    }),
-    __metadata("design:type", Array)
+    typeorm_1.OneToOne(type => Client_1.default, users => User_1),
+    __metadata("design:type", Client_1.default)
 ], User.prototype, "clients", void 0);
 __decorate([
-    typeorm_1.OneToOne(() => Specialist_1.default),
-    typeorm_1.JoinTable({
-        name: 'users_specialists',
-        joinColumns: [{ name: 'user_id' }],
-        inverseJoinColumns: [{ name: 'specialist_id' }]
-    }),
+    typeorm_1.OneToOne(type => Specialist_1.default, user => User_1),
+    __metadata("design:type", Specialist_1.default)
+], User.prototype, "specialist", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Address_1.default, user => User_1),
     __metadata("design:type", Array)
-], User.prototype, "specialists", void 0);
-User = __decorate([
+], User.prototype, "addresses", void 0);
+User = User_1 = __decorate([
     typeorm_1.Entity("users")
 ], User);
 exports.default = User;

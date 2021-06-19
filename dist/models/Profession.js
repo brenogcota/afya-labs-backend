@@ -11,13 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var Profession_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Specialist_1 = __importDefault(require("./Specialist"));
-let Profession = class Profession {
+let Profession = Profession_1 = class Profession {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
 ], Profession.prototype, "id", void 0);
 __decorate([
@@ -29,15 +30,11 @@ __decorate([
     __metadata("design:type", Date)
 ], Profession.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.OneToMany(() => Specialist_1.default, specialist => specialist.profession),
-    typeorm_1.JoinTable({
-        name: 'specialists_professions',
-        joinColumns: [{ name: 'professions_id' }],
-        inverseJoinColumns: [{ name: 'specialists_id' }]
-    }),
+    typeorm_1.OneToMany(type => Specialist_1.default, profession => Profession_1) //, { eager: true }
+    ,
     __metadata("design:type", Array)
 ], Profession.prototype, "specialists", void 0);
-Profession = __decorate([
+Profession = Profession_1 = __decorate([
     typeorm_1.Entity('professions')
 ], Profession);
 exports.default = Profession;

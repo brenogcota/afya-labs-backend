@@ -11,14 +11,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var Chart_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const ChartHistory_1 = __importDefault(require("./ChartHistory"));
 const Client_1 = __importDefault(require("./Client"));
-let Chart = class Chart {
+let Chart = Chart_1 = class Chart {
 };
 __decorate([
-    typeorm_1.PrimaryGeneratedColumn(),
+    typeorm_1.PrimaryGeneratedColumn('uuid'),
     __metadata("design:type", String)
 ], Chart.prototype, "id", void 0);
 __decorate([
@@ -30,14 +31,14 @@ __decorate([
     __metadata("design:type", Date)
 ], Chart.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => Client_1.default),
-    __metadata("design:type", Array)
-], Chart.prototype, "clients", void 0);
+    typeorm_1.ManyToOne(() => Client_1.default, charts => Chart_1),
+    __metadata("design:type", Client_1.default)
+], Chart.prototype, "client", void 0);
 __decorate([
-    typeorm_1.ManyToOne(() => ChartHistory_1.default),
-    __metadata("design:type", Array)
+    typeorm_1.ManyToOne(() => ChartHistory_1.default, charts => Chart_1),
+    __metadata("design:type", ChartHistory_1.default)
 ], Chart.prototype, "charts_history", void 0);
-Chart = __decorate([
+Chart = Chart_1 = __decorate([
     typeorm_1.Entity("charts")
 ], Chart);
 exports.default = Chart;

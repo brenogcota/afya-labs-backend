@@ -29,7 +29,7 @@ class Address {
     created_at: Date;
 
     @ManyToOne(() => User, addresses => Address)
-    user: User
+    user: User[]
 
 }
 

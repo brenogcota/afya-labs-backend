@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Permission_1 = __importDefault(require("./Permission"));
+//import Specialist from "./Specialist";
 let Role = class Role {
 };
 __decorate([
@@ -34,11 +35,7 @@ __decorate([
 ], Role.prototype, "created_at", void 0);
 __decorate([
     typeorm_1.ManyToMany(() => Permission_1.default),
-    typeorm_1.JoinTable({
-        name: "permissions_roles",
-        joinColumns: [{ name: "role_id" }],
-        inverseJoinColumns: [{ name: "permission_id" }]
-    }),
+    typeorm_1.JoinTable(),
     __metadata("design:type", Array)
 ], Role.prototype, "permission", void 0);
 Role = __decorate([
