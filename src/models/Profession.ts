@@ -9,7 +9,7 @@ class Profession {
     id: string;
 
     @Column()
-    nome: string;
+    name: string;
 
     @CreateDateColumn()
     created_at: Date;

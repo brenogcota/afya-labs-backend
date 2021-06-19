@@ -7,7 +7,7 @@ import RoleController from './controllers/RoleController';
 import fs from 'fs';
 import marked from 'marked';
 
-import { is } from './middleWares/permission';
+//import { is } from './middleWares/permission';
 //import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
