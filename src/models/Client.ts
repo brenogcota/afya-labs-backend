@@ -1,9 +1,18 @@
-
-import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import User from "./User";
-import Address from "./Address";
+import { Column, CreateDateColumn, Entity, JoinColumn, JoinTable, Long, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import Chart from "./Chart";
 import Service from "./Service";
-import TipoSanguineo from "./TipoSanguineo";
+import User from "./User";
+
+enum Tipos {
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "O+",
+    "O-",
+    "AB+",
+    "AB-"
+}
 
 @Entity("clients")
 class Client {
@@ -26,27 +35,21 @@ class Client {
     @Column()
     email: string;
 
-    @Column()
-    tipo_sanguineo: string;
+    @Column('int')
+    tipo_sanguineo: Tipos
 
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToMany(() => User)
-    @JoinTable({
-        name: "users_clients",
-        joinColumns: [{ name: "client_id"}],
-        inverseJoinColumns: [{ name: "user_id"}]
-    })
-    users: User[]
-    @OneToMany(() => Address, address => address.clients)
-    addresses: Address[]
-
-    @ManyToOne(() => TipoSanguineo, blood_type => blood_type.clients)
-    blood_types: TipoSanguineo[]
-
-    @OneToMany(() => Service, service => service.client)
+    @OneToMany(() => Service, client => Client)
     services: Service[]
+    
+    @OneToOne(() => User, clients => Client)
+    @JoinColumn()
+    users: User
+
+    @OneToMany(() => Chart, client => Client)
+    charts: Chart[]
 
 }
 

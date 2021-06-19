@@ -1,7 +1,8 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
+import Address from './Address';
 import Client from './Client';
 import Role from './Role';
-import Specialist from './Specialist';
+import Specialist from './Specialist'; 
 
 @Entity("users")
 class User {
@@ -23,28 +24,18 @@ class User {
 
 
     @ManyToMany(() => Role)
-    @JoinTable({
-        name: "users_roles",
-        joinColumns: [{ name: "user_id" }],
-        inverseJoinColumns: [{ name: "role_id" }]
-    })
+    @JoinTable()
     roles: Role[]
 
-    @ManyToMany(() => Client)
-    @JoinTable({
-        name: 'users_clients',
-        joinColumns: [{ name: 'user_id'}],
-        inverseJoinColumns: [{ name: 'client_id'}]
-    })
-    clients: Client[]
+    @OneToOne(type => Client, users => User)
+    clients: Client
 
-    @OneToOne(() => Specialist)
-    @JoinTable({
-        name: 'users_specialists',
-        joinColumns: [{ name: 'user_id'}],
-        inverseJoinColumns: [{ name: 'specialist_id'}]
-    })
-    specialists: Specialist[]
+    @OneToOne(type => Specialist, user => User)
+    specialist: Specialist
+
+    @OneToMany(() => Address, user => User)
+    addresses: Address[]
+
 }
 
 export default User;

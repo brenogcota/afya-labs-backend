@@ -1,14 +1,14 @@
-import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import User from "./User";
+import { Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import ChartHistory from "./ChartHistory";
 import Profession from "./Profession";
 import Role from "./Role";
 import Service from "./Service";
+import User from "./User";
 
 @Entity("specialists")
 class Specialist {
 
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -29,40 +29,22 @@ class Specialist {
     @CreateDateColumn()
     created_at: Date;
 
-    @ManyToMany(() => User)
-    @JoinTable({
-        name: "users_specialists",
-        joinColumns: [{ name: "specialist_id"}],
-        inverseJoinColumns: [{ name: "user_id"}]
-    })
-    users: User[]
-
-    @OneToMany(() => Service, service => service.client)
-    @JoinTable({
-        name: 'services_specialists',
-        joinColumns: [{ name: 'specialists_id'}],
-        inverseJoinColumns: [{ name: 'service_id'}]
-    })
+    @OneToMany(() => Service, specialist => Specialist)
     services: Service[]
 
-    @ManyToOne(() => Profession, profession => profession.specialists)
-    profession: Profession[]
+    @ManyToOne(type => Profession, specialists => Specialist)
+    profession: Profession
     
     @ManyToMany(() => Role)
-    @JoinTable({
-        name: "specialists_roles",
-        joinColumns: [{ name: "specialist_id" }],
-        inverseJoinColumns: [{ name: "role_id" }]
-    })
+    @JoinTable()
     roles: Role[]
 
+    @OneToOne(type => User, specialist => Specialist)
+    user: User
+
     @ManyToMany(() => ChartHistory)
-    @JoinTable({
-        name: "specialists_chartsHist",
-        joinColumns: [{ name: "specialists_id" }],
-        inverseJoinColumns: [{ name: "chartsHist_id" }]
-    })
-    specialist: ChartHistory[]
+    @JoinTable()
+    charts_history: ChartHistory[]
 
 }
 
