@@ -41,7 +41,7 @@ class Service {
     client: Client
 
     @ManyToOne(() => Specialist, services => Service)
-    specialist: Specialist[]
+    specialist: Specialist
 
 }
 
