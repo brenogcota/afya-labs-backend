@@ -12,6 +12,7 @@ import marked from 'marked';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
 import ProfessionController from './controllers/ProfessionController';
+import ServiceController from './controllers/ServiceController';
 
 const router = Router();
 
@@ -63,7 +64,10 @@ router.post('/professions', ProfessionController.create);
 
 router.post('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
+
 router.post('/addresses', AddressController.create);
+router.post('/services', ServiceController.create);
+
 
 router.get('/specialists', SpecialistController.index);
 router.get('/roles/:name', RoleController.show);

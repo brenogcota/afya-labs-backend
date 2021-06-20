@@ -43,7 +43,7 @@ class Specialist {
     @JoinColumn()
     user: User
 
-    @ManyToMany(() => ChartHistory)
+    @ManyToMany(type => ChartHistory)
     @JoinTable()
     charts_history: ChartHistory[]
 
