@@ -1,7 +1,7 @@
 import {MigrationInterface, QueryRunner} from "typeorm";
 
-export class CreateCharts1624057871792 implements MigrationInterface {
-    name = 'CreateCharts1624057871792'
+export class CreateCreateCharts1624138528740 implements MigrationInterface {
+    name = 'CreateCreateCharts1624138528740'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`CREATE TABLE "charts" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "dataAbertura" TIMESTAMP NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "clientId" uuid, "chartsHistoryId" uuid, CONSTRAINT "PK_fa7124425552d2d37725307008b" PRIMARY KEY ("id"))`);

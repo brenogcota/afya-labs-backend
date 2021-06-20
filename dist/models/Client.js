@@ -11,13 +11,24 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
+var Client_1;
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
-const User_1 = __importDefault(require("./User"));
-const Address_1 = __importDefault(require("./Address"));
+const Chart_1 = __importDefault(require("./Chart"));
 const Service_1 = __importDefault(require("./Service"));
-const TipoSanguineo_1 = __importDefault(require("./TipoSanguineo"));
-let Client = class Client {
+const User_1 = __importDefault(require("./User"));
+var Tipos;
+(function (Tipos) {
+    Tipos[Tipos["A+"] = 0] = "A+";
+    Tipos[Tipos["A-"] = 1] = "A-";
+    Tipos[Tipos["B+"] = 2] = "B+";
+    Tipos[Tipos["B-"] = 3] = "B-";
+    Tipos[Tipos["O+"] = 4] = "O+";
+    Tipos[Tipos["O-"] = 5] = "O-";
+    Tipos[Tipos["AB+"] = 6] = "AB+";
+    Tipos[Tipos["AB-"] = 7] = "AB-";
+})(Tipos || (Tipos = {}));
+let Client = Client_1 = class Client {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
@@ -45,35 +56,27 @@ __decorate([
     __metadata("design:type", String)
 ], Client.prototype, "email", void 0);
 __decorate([
-    typeorm_1.Column(),
-    __metadata("design:type", String)
+    typeorm_1.Column('int'),
+    __metadata("design:type", Number)
 ], Client.prototype, "tipo_sanguineo", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Client.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => User_1.default),
-    typeorm_1.JoinTable({
-        name: "users_clients",
-        joinColumns: [{ name: "client_id" }],
-        inverseJoinColumns: [{ name: "user_id" }]
-    }),
-    __metadata("design:type", Array)
-], Client.prototype, "users", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => Address_1.default, address => address.clients),
-    __metadata("design:type", Array)
-], Client.prototype, "addresses", void 0);
-__decorate([
-    typeorm_1.ManyToOne(() => TipoSanguineo_1.default, blood_type => blood_type.clients),
-    __metadata("design:type", Array)
-], Client.prototype, "blood_types", void 0);
-__decorate([
-    typeorm_1.OneToMany(() => Service_1.default, service => service.client),
+    typeorm_1.OneToMany(type => Service_1.default, client => Client_1),
     __metadata("design:type", Array)
 ], Client.prototype, "services", void 0);
-Client = __decorate([
+__decorate([
+    typeorm_1.OneToOne(() => User_1.default, clients => Client_1),
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", User_1.default)
+], Client.prototype, "users", void 0);
+__decorate([
+    typeorm_1.OneToMany(() => Chart_1.default, client => Client_1),
+    __metadata("design:type", Array)
+], Client.prototype, "charts", void 0);
+Client = Client_1 = __decorate([
     typeorm_1.Entity("clients")
 ], Client);
 exports.default = Client;

@@ -1,9 +1,11 @@
-import {MigrationInterface, QueryRunner} from "typeorm";
-
-export class CreateSpecialists1624057703164 implements MigrationInterface {
-    name = 'CreateSpecialists1624057703164'
-
-    public async up(queryRunner: QueryRunner): Promise<void> {
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.CreateSpecialists1624057703164 = void 0;
+class CreateSpecialists1624057703164 {
+    constructor() {
+        this.name = 'CreateSpecialists1624057703164';
+    }
+    async up(queryRunner) {
         await queryRunner.query(`CREATE TABLE "specialists" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "registro" character varying NOT NULL, "name" character varying NOT NULL, "telefone" character varying NOT NULL, "celular" character varying NOT NULL, "email" character varying NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "professionId" uuid, CONSTRAINT "PK_4bd10b339bf051026c8b6543911" PRIMARY KEY ("id"))`);
         await queryRunner.query(`CREATE TABLE "specialists_chartsHist" ("chartsHist_id" uuid NOT NULL, "specialists_id" uuid NOT NULL, CONSTRAINT "PK_d4bf8e563c9dd2fd16c91ed8cfd" PRIMARY KEY ("chartsHist_id", "specialists_id"))`);
         await queryRunner.query(`CREATE INDEX "IDX_533d21454e899209586b6c4955" ON "specialists_chartsHist" ("chartsHist_id") `);
@@ -22,8 +24,7 @@ export class CreateSpecialists1624057703164 implements MigrationInterface {
         await queryRunner.query(`ALTER TABLE "specialists_charts_history_charts_history" ADD CONSTRAINT "FK_ca516f2f8a2e89397157f307e17" FOREIGN KEY ("specialistsId") REFERENCES "specialists"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
         await queryRunner.query(`ALTER TABLE "specialists_charts_history_charts_history" ADD CONSTRAINT "FK_caaa09fc440baddfc8ec7cd5cfc" FOREIGN KEY ("chartsHistoryId") REFERENCES "charts_history"("id") ON DELETE CASCADE ON UPDATE NO ACTION`);
     }
-
-    public async down(queryRunner: QueryRunner): Promise<void> {
+    async down(queryRunner) {
         await queryRunner.query(`ALTER TABLE "specialists_charts_history_charts_history" DROP CONSTRAINT "FK_caaa09fc440baddfc8ec7cd5cfc"`);
         await queryRunner.query(`ALTER TABLE "specialists_charts_history_charts_history" DROP CONSTRAINT "FK_ca516f2f8a2e89397157f307e17"`);
         await queryRunner.query(`ALTER TABLE "specialists_roles_roles" DROP CONSTRAINT "FK_80d147ad19f3877e2c834d651b4"`);
@@ -42,5 +43,5 @@ export class CreateSpecialists1624057703164 implements MigrationInterface {
         await queryRunner.query(`DROP TABLE "specialists_chartsHist"`);
         await queryRunner.query(`DROP TABLE "specialists"`);
     }
-
 }
+exports.CreateSpecialists1624057703164 = CreateSpecialists1624057703164;

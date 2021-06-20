@@ -12,10 +12,13 @@ class ClientController {
         const userRepository = typeorm_1.getCustomRepository(UserRepository_1.default);
         const { name, cpf, telefone, celular, email, tipo_sanguineo, users } = request.body;
         const existClient = await clientRepository.findOne({ cpf });
+        const existUser = await userRepository.findOne(users);
         if (existClient) {
-            return response.status(400).json({ message: 'Client already exists!' });
+            return response.status(400).json({ message: 'Client already exist!' });
         }
-        const existsUsers = await userRepository.findByIds(users);
+        if (!existUser) {
+            return response.status(404).json({ message: 'User does not exist!' });
+        }
         const client = clientRepository.create({
             name,
             cpf,
@@ -23,7 +26,7 @@ class ClientController {
             celular,
             email,
             tipo_sanguineo,
-            users: existsUsers
+            users: existUser,
         });
         await clientRepository.save(client);
         return response.status(201).json(client);

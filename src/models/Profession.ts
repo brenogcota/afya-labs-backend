@@ -9,12 +9,12 @@ class Profession {
     id: string;
 
     @Column()
-    nome: string;
+    name: string;
 
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(type => Specialist, profession => Profession) //, { eager: true }
+    @OneToMany(type => Specialist, profession => Profession)
     specialists: Specialist[]
 }
 

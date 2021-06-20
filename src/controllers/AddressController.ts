@@ -1,18 +1,20 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import AddressRepository from '../repositories/AddressRepository';
-import ClientRepository from '../repositories/ClientRepository';
+import UserRepository from '../repositories/UserRepository';
 
 
 class AddressController {
     async create(request: Request, response: Response) {
         const addressRepository = getCustomRepository(AddressRepository);
-        const clientRepository = getCustomRepository(ClientRepository);
+        const userRepository = getCustomRepository(UserRepository);
         
         
-        const { cep, logradouro, numero, bairro, localidade, uf, clients } = request.body;
+        const { cep, logradouro, numero, bairro, localidade, uf, users } = request.body;
 
-        const existsClients = await clientRepository.findByIds(clients);
+        const existsUsers = await userRepository.findByIds(users);
+
+        console.log(existsUsers);
 
         const address = addressRepository.create({
             cep,
@@ -21,12 +23,14 @@ class AddressController {
             bairro,
             localidade,
             uf,
-            clients: existsClients
+            user: existsUsers[0]
         });
+
+        console.log(address)
 
         await addressRepository.save(address);
 
-        return response.json(address);
+        return response.status(201).json(address);
     }
 }
 
