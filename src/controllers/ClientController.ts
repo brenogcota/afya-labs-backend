@@ -35,12 +35,12 @@ class ClientController {
             celular,
             email,
             tipo_sanguineo,
-            users: existUser,
+            users: existUser
         });
 
         await clientRepository.save(client);
-        // existUser.roles.push(existRoles!);
-        // await userRepository.save(existUser);
+        existUser.roles.push(existRoles!);
+        await userRepository.save(existUser);
 
         return response.status(201).json({client: client, user: existUser});
     }
