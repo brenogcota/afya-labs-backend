@@ -6,9 +6,9 @@
 ![](https://img.shields.io/badge/database-postgreSQL-blue)
 ![](https://img.shields.io/badge/Infra-Heroku-blueviolet)
 
-|Anderson()=>|Maike()=>|Maycon()=>|Pedro()=>|Ricardo()=>|
-|-|-|-|-|-|
-|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/29051982?s=400&u=9075f45ce5450c21e5fbab326df6534333be3126&v=4"  alt="Anderson" /><br />[Anderson][andersonprax] Praxedes</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/48857972?s=400&u=f98c1323cccee41f1ebb0310cb9016a33d29faa7&v=4"  alt="Maike Menezes" /><br />[Maike][maikermenezes] Menezes</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/52868084?s=400&u=dbd20b21a0f03b3720a5b97281bc1364eec33c36&v=4" alt="Maycon Leite" width="100px"/><br />[Maycon][MayconLeite] Leite </p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/10146381?s=460&u=a1a92ccb3d413f52080f492e2a23305ee7c92aa1&v=4"  alt="Pedro França"/><br />[Pedro][pedr0hug0] França</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/43882173?s=400&u=35f5827bc6af1cfec874a91947f62a4f503c86bf&v=4"  alt="Ricardo"/><br />[Ricardo][toggy81] Tognola</p>|
+|Ailson()=>|Aldicleiry()=>|Aline()=>|Anderson()=>|Breno()=>|Eduardo()=>|
+|-|-|-|-|-|-|
+|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/67612672?v=4"  alt="Ailson" /><br />[Ailson][ailsonjr] Junior</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/60198926?v=4"  alt="Aldicleiry" /><br />[Aldicleiry][AldySouza] Silva</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/79863993?v=4" alt="Aline" width="100px"/><br />[Aline][alinebw] Branco </p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/29051982?s=400&u=9075f45ce5450c21e5fbab326df6534333be3126&v=4"  alt="Anderson"/><br />[Anderson][andersonprax] Praxedes</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/46490801?v=4"  alt="Breno"/><br />[Breno][brenogcota] Cota</p>|<p align="center"><img style="border-radius: 100px" width="100px" src="https://avatars.githubusercontent.com/u/69769953?v=4"  alt="Eduardo" /><br />[Eduardo][EduardoRS78] Silva</p>|
 
 ### run
 - npm i
@@ -46,8 +46,9 @@
 * 2: Realizar o login para a geração do token
 * 3: consumir as funcionalidades utilizando o token.
 
+[ailsonjr]:https://github.com/ailsonjr
+[AldySouza]:https://github.com/AldySouza
+[alinebw]:https://github.com/alinebw
 [andersonprax]:https://github.com/andersonprax
-[maikermenezes]:https://github.com/maikermenezes
-[MayconLeite]:https://github.com/MayconLeite
-[pedr0hug0]:https://github.com/pedr0hug0
-[toggy81]:https://github.com/Toggy81
+[brenogcota]:https://github.com/brenogcota
+[EduardoRS78]:https://github.com/EduardoRS78
