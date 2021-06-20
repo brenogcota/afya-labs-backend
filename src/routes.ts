@@ -65,6 +65,7 @@ router.post('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
 router.post('/addresses', AddressController.create);
 
-router.get('/specialists', SpecialistController.create);
+router.get('/specialists', SpecialistController.index);
+router.get('/roles/:name', RoleController.show);
 
 export { router };
