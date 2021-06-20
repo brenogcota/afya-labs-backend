@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
 import ClientRepository from '../repositories/ClientRepository';
+import RoleRepository from '../repositories/RoleRepository';
 import UserRepository from '../repositories/UserRepository';
 
 class ClientController {
@@ -8,12 +9,16 @@ class ClientController {
     async create(request: Request, response: Response){
         const clientRepository = getCustomRepository(ClientRepository);
         const userRepository = getCustomRepository(UserRepository);
+        const roleRepository = getCustomRepository(RoleRepository);
 
-        const { name, cpf, telefone, celular, email, tipo_sanguineo, users } = request.body;
+        const { name, cpf, telefone, celular, email, tipo_sanguineo, users, role } = request.body;
 
         const existClient = await clientRepository.findOne({cpf});
+        const existUser = await userRepository.findOne(users, {relations: ["roles"]});
+        const existRoles = await roleRepository.findOne(role);
 
-        const existUser = await userRepository.findOne(users);
+        console.log(existRoles)
+        console.log(existUser)
 
         if(existClient) {
             return response.status(400).json({ message: 'Client already exist!' })
@@ -34,8 +39,10 @@ class ClientController {
         });
 
         await clientRepository.save(client);
+        // existUser.roles.push(existRoles!);
+        // await userRepository.save(existUser);
 
-        return response.status(201).json(client);
+        return response.status(201).json({client: client, user: existUser});
     }
 }
 
