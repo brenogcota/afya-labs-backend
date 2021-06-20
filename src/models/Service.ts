@@ -2,10 +2,10 @@ import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } f
 import Client from "./Client";
 import Specialist from "./Specialist";
 
-export enum Status {
-    AGENDADO = "agendado",
-    REALIZADO = "realizado",
-    CANCELADO = "cancelado"
+enum Status {
+    "AGENDADO",
+    "REALIZADO",
+    "CANCELADO"
 }
 
 
@@ -27,11 +27,7 @@ class Service {
     @Column()
     valor: Number;
     
-    @Column({
-        type: "enum",
-        enum: Status,
-        default: Status.AGENDADO
-    })
+    @Column('int')
     status: Status;
 
     @CreateDateColumn()
@@ -41,7 +37,7 @@ class Service {
     client: Client
 
     @ManyToOne(() => Specialist, services => Service)
-    specialist: Specialist[]
+    specialist: Specialist
 
 }
 

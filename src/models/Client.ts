@@ -41,7 +41,7 @@ class Client {
     @CreateDateColumn()
     created_at: Date;
 
-    @OneToMany(type => Service, client => Client)
+    @OneToMany(() => Service, client => Client)
     services: Service[]
     
     @OneToOne(() => User, clients => Client)

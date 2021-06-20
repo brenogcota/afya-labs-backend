@@ -9,6 +9,7 @@ import { is } from './middlewares/permission';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
 import ProfessionController from './controllers/ProfessionController';
+import ServiceController from './controllers/ServiceController';
 
 const router = Router();
 
@@ -21,6 +22,7 @@ router.post('/professions', ProfessionController.create);
 router.post('/specialists', SpecialistController.create);
 //router.get('/specialists', SpecialistController.create);
 router.post('/clients', ClientController.create);
+router.post('/services', ServiceController.create);
 
 
 export { router };
