@@ -8,12 +8,26 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 let Address = class Address {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
+=======
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var Address_1;
+Object.defineProperty(exports, "__esModule", { value: true });
+const typeorm_1 = require("typeorm");
+const User_1 = __importDefault(require("./User"));
+let Address = Address_1 = class Address {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn('uuid'),
+>>>>>>> fb4f42c82cccad3c7979790dd2059bc8ca56ac70
     __metadata("design:type", String)
 ], Address.prototype, "id", void 0);
 __decorate([
@@ -44,7 +58,16 @@ __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Address.prototype, "created_at", void 0);
+<<<<<<< HEAD
 Address = __decorate([
     typeorm_1.Entity("adresses")
+=======
+__decorate([
+    typeorm_1.ManyToOne(() => User_1.default, addresses => Address_1),
+    __metadata("design:type", Array)
+], Address.prototype, "user", void 0);
+Address = Address_1 = __decorate([
+    typeorm_1.Entity("addresses")
+>>>>>>> fb4f42c82cccad3c7979790dd2059bc8ca56ac70
 ], Address);
 exports.default = Address;

@@ -1,9 +1,10 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { JoinTable } from "typeorm";
+import { Column, CreateDateColumn, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import User from "./User";
 
-
-@Entity("adresses")
+@Entity("addresses")
 class Address {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn('uuid')
     id: string;
 
     @Column()
@@ -26,6 +27,9 @@ class Address {
 
     @CreateDateColumn()
     created_at: Date;
+
+    @ManyToOne(() => User, addresses => Address)
+    user: User
 
 }
 

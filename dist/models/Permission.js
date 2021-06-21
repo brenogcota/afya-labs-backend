@@ -13,7 +13,11 @@ const typeorm_1 = require("typeorm");
 let Permission = class Permission {
 };
 __decorate([
+<<<<<<< HEAD
     typeorm_1.PrimaryGeneratedColumn("uuid"),
+=======
+    typeorm_1.PrimaryGeneratedColumn(),
+>>>>>>> fb4f42c82cccad3c7979790dd2059bc8ca56ac70
     __metadata("design:type", String)
 ], Permission.prototype, "id", void 0);
 __decorate([

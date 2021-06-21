@@ -35,6 +35,7 @@ class SessionController {
             expiresIn: '1d'
         });// params (payload = os dados que desejamos que fiquem armazedos no token, hash = a chave secreta, )
 
+        request.user_id = user.id;
         return response.json({
             token,
             user

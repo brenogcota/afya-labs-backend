@@ -8,12 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+<<<<<<< HEAD
 Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 let Chart = class Chart {
 };
 __decorate([
     typeorm_1.PrimaryGeneratedColumn(),
+=======
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+var Chart_1;
+Object.defineProperty(exports, "__esModule", { value: true });
+const typeorm_1 = require("typeorm");
+const ChartHistory_1 = __importDefault(require("./ChartHistory"));
+const Client_1 = __importDefault(require("./Client"));
+let Chart = Chart_1 = class Chart {
+};
+__decorate([
+    typeorm_1.PrimaryGeneratedColumn('uuid'),
+>>>>>>> fb4f42c82cccad3c7979790dd2059bc8ca56ac70
     __metadata("design:type", String)
 ], Chart.prototype, "id", void 0);
 __decorate([
@@ -21,10 +36,25 @@ __decorate([
     __metadata("design:type", Date)
 ], Chart.prototype, "dataAbertura", void 0);
 __decorate([
+<<<<<<< HEAD
     typeorm_1.Column(),
     __metadata("design:type", Date)
 ], Chart.prototype, "creatd_at", void 0);
 Chart = __decorate([
+=======
+    typeorm_1.CreateDateColumn(),
+    __metadata("design:type", Date)
+], Chart.prototype, "created_at", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => Client_1.default, charts => Chart_1),
+    __metadata("design:type", Client_1.default)
+], Chart.prototype, "client", void 0);
+__decorate([
+    typeorm_1.ManyToOne(() => ChartHistory_1.default, charts => Chart_1),
+    __metadata("design:type", ChartHistory_1.default)
+], Chart.prototype, "charts_history", void 0);
+Chart = Chart_1 = __decorate([
+>>>>>>> fb4f42c82cccad3c7979790dd2059bc8ca56ac70
     typeorm_1.Entity("charts")
 ], Chart);
 exports.default = Chart;
