@@ -17,7 +17,7 @@ enum Tipos {
 @Entity("clients")
 class Client {
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column()

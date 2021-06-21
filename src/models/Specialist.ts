@@ -5,7 +5,6 @@ import Role from "./Role";
 import Service from "./Service";
 import User from "./User";
 
-
 @Entity("specialists")
 class Specialist {
 

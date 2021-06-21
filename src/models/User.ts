@@ -7,7 +7,7 @@ import Specialist from './Specialist';
 @Entity("users")
 class User {
 
-    @PrimaryGeneratedColumn("uuid")
+    @PrimaryGeneratedColumn()
     id: string;
 
     @Column()
@@ -35,6 +35,7 @@ class User {
 
     @OneToMany(() => Address, user => User)
     addresses: Address[]
+
 }
 
 export default User;
