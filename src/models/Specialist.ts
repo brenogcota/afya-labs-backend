@@ -34,10 +34,6 @@ class Specialist {
 
     @ManyToOne(type => Profession, specialists => Specialist)
     profession: Profession
-    
-    @ManyToMany(() => Role)
-    @JoinTable()
-    roles: Role[]
 
     @OneToOne(type => User, specialist => Specialist)
     @JoinColumn()

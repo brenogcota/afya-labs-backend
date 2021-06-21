@@ -12,13 +12,13 @@ class SpecialistController {
         const userRepository = getCustomRepository(UserRepository);
         const roleRepository = getCustomRepository(RoleRepository);
 
-        const { registro, name, telefone, celular, email, profession, roles, user } = request.body;
+        const { registro, name, telefone, celular, email, profession, user, role } = request.body;
 
         const existSpecialist = await specialistRepository.findOne({registro});        
 
-        const existUser = await userRepository.findOne(user);
+        const existUser = await userRepository.findOne(user, {relations: ["roles"]});
 
-        const existsRoles = await roleRepository.findByIds(roles);
+        const existsRoles = await roleRepository.findOne(role);
         
         if(existSpecialist) {
             return response.status(400).json({ message: 'Specialist already exists!' })
@@ -35,7 +35,6 @@ class SpecialistController {
             celular,
             email,
             profession,
-            roles: existsRoles,
             user: existUser
         });
 
@@ -47,11 +46,11 @@ class SpecialistController {
        
 
         await specialistRepository.save(specialist);
+        existUser.roles.push(existsRoles!);
+        await userRepository.save(existUser);
 
         return response.status(200).json(specialist)
     }
-
-    async index(request: Request, response: Response) {}
 }
 
 export default new SpecialistController;
