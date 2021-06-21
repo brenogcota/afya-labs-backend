@@ -5,6 +5,7 @@ import ServiceRepository from '../repositories/ServiceRepository';
 import SpecialistRepository from '../repositories/SpecialistRepository';
 
 class ServiceController {
+    
     async create(request: Request, response: Response){
 
         const serviceRepository = getCustomRepository(ServiceRepository);
@@ -34,11 +35,41 @@ class ServiceController {
             client: existsClient,
             specialist: existsSpecialist
         });
-        
-        await serviceRepository.save(service);
 
+        await serviceRepository.save(service);
+        //existsClient.services.indexOf(service);
         return response.status(200).json(service);
     }
+
+    /* async index(request: Request, response: Response){
+        const serviceRepository = getCustomRepository(ServiceRepository);
+        const specialistRepository = getCustomRepository(SpecialistRepository);
+        const clientRepository = getCustomRepository(ClientRepository);
+
+        const { dataAgendamento, dataAtendimento, horaAtendimento, valor, status, client, specialist } = request.body;
+
+        const existService = await serviceRepository.find(client)
+        const existsSpecialist = await specialistRepository.findOne(specialist);
+        const existsClient = await clientRepository.findOne(client);
+
+        if(!existService){
+            return response.status(404).json({ message: 'Client does not exist!'})
+        }
+
+        const service = serviceRepository.index({
+            dataAgendamento,
+            dataAtendimento,
+            horaAtendimento,
+            valor,
+            status,
+            client,
+            specialist
+        });
+
+        serviceRepository.show(service);
+
+        return response.status(200).json(service)
+    } */
 }
 
 export default new ServiceController;
