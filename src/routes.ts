@@ -25,7 +25,6 @@ router.post('/specialists', SpecialistController.create);
 
 router.post('/clients', ClientController.create);
 router.post('/services', ServiceController.create);
-//router.get('/services/:id', ServiceController.index);
 router.post('/charts', ChartController.create);
 
 
