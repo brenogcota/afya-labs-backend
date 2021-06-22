@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getCustomRepository } from 'typeorm';
+import ProfessionRepository from '../repositories/ProfessionRepository';
 import RoleRepository from '../repositories/RoleRepository';
 //import ProfessionRepository from '../repositories/ProfessionRepository';
 import SpecialistRepository from '../repositories/SpecialistRepository';
@@ -11,8 +12,9 @@ class SpecialistController {
         const specialistRepository = getCustomRepository(SpecialistRepository);
         const userRepository = getCustomRepository(UserRepository);
         const roleRepository = getCustomRepository(RoleRepository);
+        const professionRepository = getCustomRepository(ProfessionRepository);
 
-        const { registro, name, telefone, celular, email, profession, user, role } = request.body;
+        const { registro, name, telefone, celular, email, profissao, user, role } = request.body;
 
         const existSpecialist = await specialistRepository.findOne({registro});        
 
@@ -34,9 +36,12 @@ class SpecialistController {
             telefone,
             celular,
             email,
-            profession,
             user: existUser
         });
+
+        const newProfession = professionRepository.create({
+            name: profissao
+        })
 
         /* const findByName = await specialistRepository.find(name);
 
@@ -46,6 +51,7 @@ class SpecialistController {
        
 
         await specialistRepository.save(specialist);
+        await professionRepository.save(newProfession);
         existUser.roles.push(existsRoles!);
         await userRepository.save(existUser);
 
