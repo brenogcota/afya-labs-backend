@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.CreateCharts1624057871792 = void 0;
-class CreateCharts1624057871792 {
+exports.CreateCreateCharts1624138528740 = void 0;
+class CreateCreateCharts1624138528740 {
     constructor() {
-        this.name = 'CreateCharts1624057871792';
+        this.name = 'CreateCreateCharts1624138528740';
     }
     async up(queryRunner) {
         await queryRunner.query(`CREATE TABLE "charts" ("id" uuid NOT NULL DEFAULT uuid_generate_v4(), "dataAbertura" TIMESTAMP NOT NULL, "created_at" TIMESTAMP NOT NULL DEFAULT now(), "clientId" uuid, "chartsHistoryId" uuid, CONSTRAINT "PK_fa7124425552d2d37725307008b" PRIMARY KEY ("id"))`);
@@ -16,4 +16,4 @@ class CreateCharts1624057871792 {
         await queryRunner.query(`DROP TABLE "charts"`);
     }
 }
-exports.CreateCharts1624057871792 = CreateCharts1624057871792;
+exports.CreateCreateCharts1624138528740 = CreateCreateCharts1624138528740;

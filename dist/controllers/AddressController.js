@@ -12,6 +12,7 @@ class AddressController {
         const userRepository = typeorm_1.getCustomRepository(UserRepository_1.default);
         const { cep, logradouro, numero, bairro, localidade, uf, users } = request.body;
         const existsUsers = await userRepository.findByIds(users);
+        console.log(existsUsers);
         const address = addressRepository.create({
             cep,
             logradouro,
@@ -19,10 +20,11 @@ class AddressController {
             bairro,
             localidade,
             uf,
-            user: existsUsers
+            user: existsUsers[0]
         });
+        console.log(address);
         await addressRepository.save(address);
-        return response.json(address);
+        return response.status(201).json(address);
     }
 }
 exports.default = new AddressController();

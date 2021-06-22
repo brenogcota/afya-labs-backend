@@ -64,7 +64,7 @@ __decorate([
     __metadata("design:type", Date)
 ], Client.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => Service_1.default, client => Client_1),
+    typeorm_1.OneToMany(() => Service_1.default, client => Client_1),
     __metadata("design:type", Array)
 ], Client.prototype, "services", void 0);
 __decorate([

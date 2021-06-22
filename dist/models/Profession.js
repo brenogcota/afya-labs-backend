@@ -24,14 +24,13 @@ __decorate([
 __decorate([
     typeorm_1.Column(),
     __metadata("design:type", String)
-], Profession.prototype, "nome", void 0);
+], Profession.prototype, "name", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
     __metadata("design:type", Date)
 ], Profession.prototype, "created_at", void 0);
 __decorate([
-    typeorm_1.OneToMany(type => Specialist_1.default, profession => Profession_1) //, { eager: true }
-    ,
+    typeorm_1.OneToMany(type => Specialist_1.default, profession => Profession_1),
     __metadata("design:type", Array)
 ], Profession.prototype, "specialists", void 0);
 Profession = Profession_1 = __decorate([

@@ -12,7 +12,7 @@ class AddressController {
         
         const { cep, logradouro, numero, bairro, localidade, uf, users } = request.body;
 
-        const existsUsers = await userRepository.findByIds(users);
+        const existsUsers = await userRepository.findOne(users);
 
         console.log(existsUsers);
 
@@ -23,7 +23,7 @@ class AddressController {
             bairro,
             localidade,
             uf,
-            user: existsUsers[0]
+            user: existsUsers
         });
 
         console.log(address)

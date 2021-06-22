@@ -16,7 +16,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const ChartHistory_1 = __importDefault(require("./ChartHistory"));
 const Profession_1 = __importDefault(require("./Profession"));
-const Role_1 = __importDefault(require("./Role"));
 const Service_1 = __importDefault(require("./Service"));
 const User_1 = __importDefault(require("./User"));
 let Specialist = Specialist_1 = class Specialist {
@@ -55,19 +54,15 @@ __decorate([
 ], Specialist.prototype, "services", void 0);
 __decorate([
     typeorm_1.ManyToOne(type => Profession_1.default, specialists => Specialist_1),
-    __metadata("design:type", Array)
+    __metadata("design:type", Profession_1.default)
 ], Specialist.prototype, "profession", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => Role_1.default),
-    typeorm_1.JoinTable(),
-    __metadata("design:type", Array)
-], Specialist.prototype, "roles", void 0);
-__decorate([
     typeorm_1.OneToOne(type => User_1.default, specialist => Specialist_1),
-    __metadata("design:type", Array)
+    typeorm_1.JoinColumn(),
+    __metadata("design:type", User_1.default)
 ], Specialist.prototype, "user", void 0);
 __decorate([
-    typeorm_1.ManyToMany(() => ChartHistory_1.default),
+    typeorm_1.ManyToMany(type => ChartHistory_1.default),
     typeorm_1.JoinTable(),
     __metadata("design:type", Array)
 ], Specialist.prototype, "charts_history", void 0);

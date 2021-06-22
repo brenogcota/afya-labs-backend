@@ -25,5 +25,14 @@ class RoleController {
         await roleRepository.save(role);
         return response.json(role);
     }
+    async show(request, response) {
+        const roleRepository = typeorm_1.getCustomRepository(RoleRepository_1.default);
+        const name = request.params.name;
+        const role = await roleRepository.findByName(name.toUpperCase());
+        if (!role) {
+            return response.status(404).json({ message: 'role not found' });
+        }
+        return response.status(200).json(role);
+    }
 }
 exports.default = new RoleController();

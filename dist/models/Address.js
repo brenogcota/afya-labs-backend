@@ -51,7 +51,7 @@ __decorate([
 ], Address.prototype, "created_at", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => User_1.default, addresses => Address_1),
-    __metadata("design:type", Array)
+    __metadata("design:type", User_1.default)
 ], Address.prototype, "user", void 0);
 Address = Address_1 = __decorate([
     typeorm_1.Entity("addresses")

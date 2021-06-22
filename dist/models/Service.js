@@ -13,16 +13,15 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 var Service_1;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Status = void 0;
 const typeorm_1 = require("typeorm");
 const Client_1 = __importDefault(require("./Client"));
 const Specialist_1 = __importDefault(require("./Specialist"));
 var Status;
 (function (Status) {
-    Status["AGENDADO"] = "agendado";
-    Status["REALIZADO"] = "realizado";
-    Status["CANCELADO"] = "cancelado";
-})(Status = exports.Status || (exports.Status = {}));
+    Status[Status["AGENDADO"] = 0] = "AGENDADO";
+    Status[Status["REALIZADO"] = 1] = "REALIZADO";
+    Status[Status["CANCELADO"] = 2] = "CANCELADO";
+})(Status || (Status = {}));
 let Service = Service_1 = class Service {
 };
 __decorate([
@@ -46,12 +45,8 @@ __decorate([
     __metadata("design:type", Number)
 ], Service.prototype, "valor", void 0);
 __decorate([
-    typeorm_1.Column({
-        type: "enum",
-        enum: Status,
-        default: Status.AGENDADO
-    }),
-    __metadata("design:type", String)
+    typeorm_1.Column('int'),
+    __metadata("design:type", Number)
 ], Service.prototype, "status", void 0);
 __decorate([
     typeorm_1.CreateDateColumn(),
@@ -63,7 +58,7 @@ __decorate([
 ], Service.prototype, "client", void 0);
 __decorate([
     typeorm_1.ManyToOne(() => Specialist_1.default, services => Service_1),
-    __metadata("design:type", Array)
+    __metadata("design:type", Specialist_1.default)
 ], Service.prototype, "specialist", void 0);
 Service = Service_1 = __decorate([
     typeorm_1.Entity("services")

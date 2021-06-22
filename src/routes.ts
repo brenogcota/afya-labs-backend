@@ -69,7 +69,7 @@ router.post('/addresses', AddressController.create);
 router.post('/services', ServiceController.create);
 
 
-router.get('/specialists', SpecialistController.index);
 router.get('/roles/:name', RoleController.show);
+router.get('/specialists', SpecialistController.index);
 
 export { router };

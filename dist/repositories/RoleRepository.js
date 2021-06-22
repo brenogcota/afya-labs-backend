@@ -12,6 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const typeorm_1 = require("typeorm");
 const Role_1 = __importDefault(require("../models/Role"));
 let RoleRepository = class RoleRepository extends typeorm_1.Repository {
+    findByName(name) {
+        return this.findOne({ name });
+    }
 };
 RoleRepository = __decorate([
     typeorm_1.EntityRepository(Role_1.default)
