@@ -54,19 +54,9 @@ class SpecialistController {
 
     async index(request: Request, response: Response) {
         const specialistRepository = getCustomRepository(SpecialistRepository,);
-
-        //const specialists = await specialistRepository.findOne({relations: ["professions"]});
-        
-        const specialistsAndProfessions = await specialistRepository.createQueryBuilder("specialists")
-                                                .leftJoinAndSelect("specialists.profession", "professions")
-                                                .getMany();
-
         const specialistsAndAdresses = await specialistRepository.getSpecialistAndAddresses();
 
-         console.log(specialistsAndAdresses);                                       
-                                                
-
-        return response.status(200).json(specialistsAndProfessions);
+        return response.status(200).json(specialistsAndAdresses);
     }
 }
 
