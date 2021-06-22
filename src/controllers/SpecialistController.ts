@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { getCustomRepository } from 'typeorm';
+import { createQueryBuilder, EntityManager, getCustomRepository } from 'typeorm';
 import ProfessionRepository from '../repositories/ProfessionRepository';
 import RoleRepository from '../repositories/RoleRepository';
 //import ProfessionRepository from '../repositories/ProfessionRepository';
@@ -29,6 +29,11 @@ class SpecialistController {
         if(!existUser) {
             return response.status(404).json({ message: 'User does not exist!' })
         }
+
+        const newProfession = professionRepository.create({
+            name: profissao
+        });
+        await professionRepository.save(newProfession);
         
         const specialist = specialistRepository.create({
             registro,//encontrar um jeito de fazer a confirmação
@@ -36,33 +41,32 @@ class SpecialistController {
             telefone,
             celular,
             email,
-            user: existUser
+            user: existUser,
+            profession: newProfession
         });
 
-        const newProfession = professionRepository.create({
-            name: profissao
-        })
-
-        /* const findByName = await specialistRepository.find(name);
-
-        if(findByName) {
-            return response.status(200).json(specialist)
-        } */
-       
-
         await specialistRepository.save(specialist);
-        await professionRepository.save(newProfession);
         existUser.roles.push(existsRoles!);
         await userRepository.save(existUser);
 
-        return response.status(200).json(specialist)
+        return response.status(201).json({ specialist: specialist, user: existUser });
     }
 
     async index(request: Request, response: Response) {
-        const specialistRepository = getCustomRepository(SpecialistRepository);
+        const specialistRepository = getCustomRepository(SpecialistRepository,);
 
-        const specialists = await specialistRepository.find();
-        return response.status(200).json(specialists);
+        //const specialists = await specialistRepository.findOne({relations: ["professions"]});
+        
+        const specialistsAndProfessions = await specialistRepository.createQueryBuilder("specialists")
+                                                .leftJoinAndSelect("specialists.profession", "professions")
+                                                .getMany();
+
+        const specialistsAndAdresses = await specialistRepository.getSpecialistAndAddresses();
+
+         console.log(specialistsAndAdresses);                                       
+                                                
+
+        return response.status(200).json(specialistsAndProfessions);
     }
 }
 
