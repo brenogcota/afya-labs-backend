@@ -6,6 +6,12 @@
 ![](https://afya.gama.academy/wp-content/uploads/2021/04/logo-afya-labs.png) 
 ![](https://assets.website-files.com/5ff79f3ebebf6b12f6b7747f/5ffe04fc6284b7e90070d985_logo-gama-academy-p-500.png)
 
+## Link dos arquivos relacionados:
+  - [Repositório do front-end](https://github.com/AldySouza/afya-application)
+  - [Apresentação em Slides](https://docs.google.com/presentation/d/e/2PACX-1vS7cxcp3dEsxefz5JtQMn3Wyram0TgP9PzXeYYsyvQlXgt7CbGrhN2fQc5XHUu_YNtEhz_r2jPDqlGm/pub?start=true&loop=false&delayms=3000&slide=id.ge0ebf6281c_0_46)
+  - [Vídeo da apresentação do Front-End](https://www.loom.com/share/066ca9416b6842f1802ccc3ae613622e)
+  - [Vídeo da apresentação do Back-End](https://www.loom.com/share/d8eb2f693df942a1bffc9e4ec5e23847)
+
 # API iConsultas
 
 ## Sobre:
