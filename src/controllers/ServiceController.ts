@@ -5,6 +5,7 @@ import ServiceRepository from '../repositories/ServiceRepository';
 import SpecialistRepository from '../repositories/SpecialistRepository';
 
 class ServiceController {
+    
     async create(request: Request, response: Response){
 
         const serviceRepository = getCustomRepository(ServiceRepository);
@@ -34,11 +35,12 @@ class ServiceController {
             client: existsClient,
             specialist: existsSpecialist
         });
-        
-        await serviceRepository.save(service);
 
+        await serviceRepository.save(service);
+        //existsClient.services.indexOf(service);
         return response.status(200).json(service);
     }
+
 }
 
 export default new ServiceController;

@@ -8,11 +8,14 @@ import fs from 'fs';
 import marked from 'marked';
 
 //import { is } from './middleWares/permission';
+
 //import ChartController from './controllers/ChartController';
 import SpecialistController from './controllers/SpecialistController';
 import ClientController from './controllers/ClientController';
 import ProfessionController from './controllers/ProfessionController';
 import ServiceController from './controllers/ServiceController';
+import {} from './database/'
+import ChartController from './controllers/ChartController';
 
 const router = Router();
 
@@ -67,6 +70,7 @@ router.post('/clients', ClientController.create);
 
 router.post('/addresses', AddressController.create);
 router.post('/services', ServiceController.create);
+router.post('/charts', ChartController.create);
 
 
 router.get('/roles/:name', RoleController.show);
