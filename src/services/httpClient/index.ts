@@ -3,20 +3,19 @@ import { HttpRequest, HttpResponse, HttpClient } from './interfaces/httpClient';
 
 export default class AxiosHttpClient implements HttpClient {  
   async request (data: HttpRequest): Promise<HttpResponse> {
-    let axiosResponse: AxiosResponse
+    let axiosResponse: AxiosResponse;
+    const { url, method, body, headers } = data;
+ 
     try {
-      axiosResponse = await axios.request({
-        url: data.url,
-        method: data.method,
-        data: data.body,
-        headers: data.headers
-      })
+      axiosResponse = await axios.request({ url, method, data: body, headers });
     } catch (error) {
-      axiosResponse = error.response
+      axiosResponse = error.response;
     }
+    
+    const { status, data } = axiosResponse;
     return {
-      statusCode: axiosResponse.status,
-      body: axiosResponse.data
+      statusCode: status,
+      body: data,
     }
   }
 }
